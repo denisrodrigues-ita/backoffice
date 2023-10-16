@@ -1,0 +1,10 @@
+[
+  {
+    "route": "/",
+    "title": "Inicio"
+  },
+  {
+    "route": "/backoffice",
+    "title": "Backoffice"
+  }
+]
