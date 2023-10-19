@@ -5,7 +5,7 @@ import Link from "next/link";
 import { routes } from "@/json";
 import { DdevSVG } from "@/assets";
 import { FiChevronDown } from "react-icons/fi";
-import { ToggleTheme, Card } from "..";
+import { ToggleTheme } from "..";
 
 const Header = () => {
   const [isOpenDropdown, setIsOpenDropdown] = React.useState(false);
@@ -50,7 +50,6 @@ const Header = () => {
           />
         </button>
       </div>
-      <Card />
     </header>
   );
 };

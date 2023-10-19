@@ -8,7 +8,7 @@ const testeCard = {
 
 const Card = () => {
   return (
-    <div className="grid grid-cols-2 gap-4 mt-8">
+    <div className="grid grid-cols-2 gap-4 my-8">
       <div className="border-gray-light dark:border-gray-dark border-2 rounded flex gap-4 p-4">
         <div className="self-center">
           <MdPeopleAlt size={50} />
