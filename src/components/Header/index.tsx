@@ -44,7 +44,7 @@ const Header = () => {
           <FiChevronDown
             className={`${
               isOpenDropdown
-                ? "rotate-180 duration-300"
+                ? "-rotate-180 duration-300"
                 : "rotate-0 duration-300"
             }`}
           />
