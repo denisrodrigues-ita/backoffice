@@ -10,10 +10,13 @@ const api = {
       const response = await fetch(`${BASE_URL}/${engaged_id}`, {
         method: "GET",
       });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
       const result = await response.json();
       return { response, result };
     } catch (error) {
-      return {};
+      throw error;
     } finally {
       setIsLoading(false);
     }

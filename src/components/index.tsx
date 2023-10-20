@@ -5,3 +5,4 @@ export { default as Card } from "./Card";
 export { default as BackofficeComponent } from "./BackofficeComponent";
 export { default as Loading } from "./Loading";
 export { default as Table } from "./Table";
+export { default as Toast } from "./Toast";
