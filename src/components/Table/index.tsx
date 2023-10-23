@@ -3,16 +3,16 @@ import statusEnum from "@/enums/stautsEnum";
 
 const Table = () => {
   const convidados = [
-    { nome: "João", confirmado: true },
-    { nome: "Maria", confirmado: false },
-    { nome: "José", confirmado: true },
-    { nome: "Ana", confirmado: false },
-    { nome: "Pedro", confirmado: true },
-    { nome: "Marta", confirmado: true },
-    { nome: "Carlos", confirmado: false },
-    { nome: "Laura", confirmado: true },
-    { nome: "Paulo", confirmado: false },
-    { nome: "Catarina", confirmado: true },
+    { nome: "João Pedro Maria da Silva", confirmado: true },
+    { nome: "Maria de Oliveira", confirmado: false },
+    { nome: "José Antônio dos Santos", confirmado: true },
+    { nome: "Ana Luísa Rodrigues da Costa", confirmado: false },
+    { nome: "Pedro Henrique Alves Pereira", confirmado: true },
+    { nome: "Marta Cristina Pereira de Sousa", confirmado: true },
+    { nome: "Carlos Eduardo da Silva Pereira", confirmado: false },
+    { nome: "Laura Beatriz Martins de Freitas", confirmado: true },
+    { nome: "Paulo Roberto Ferreira da Silva", confirmado: false },
+    { nome: "Catarina da Silva Sousa e Silva", confirmado: true },
   ];
 
   const handleBadge = (confirmado: boolean) => {

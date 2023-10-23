@@ -1,7 +1,9 @@
 import React from "react";
 import { Card, Table } from "..";
+import { DataGuestsProps } from "@/interfaces";
 
-const BackofficeComponent = () => {
+const BackofficeComponent: React.FC<DataGuestsProps> = ({dataGuests}) => {
+  console.log(dataGuests)
   return (
     <>
       <Card />

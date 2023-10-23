@@ -3,13 +3,14 @@
 import React from "react";
 import { api } from "@/services";
 import { BackofficeComponent, Loading, Toast } from "@/components";
-import { StatusProps } from "@/interfaces";
+import { DataGuestsProps, StatusProps } from "@/interfaces";
 
 const Backoffice = () => {
   const [isToastOpen, setIsToastOpen] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
   const [message, setMessage] = React.useState("");
   const [status, setStatus] = React.useState<StatusProps["status"]>("success");
+  const [dataGuests, setDataGuests] = React.useState();
 
   React.useEffect(() => {
     const timer = setTimeout(() => {
@@ -24,7 +25,9 @@ const Backoffice = () => {
     const fetchGuests = async () => {
       try {
         const { result, response } = await api.getGuests(1, setIsLoading);
-        console.log(result, response);
+        if (response.ok) {
+          setDataGuests(result);
+        }
       } catch (error) {
         setIsToastOpen(true);
         setMessage(`Ops, algo deu errado! ${error}`);
@@ -44,7 +47,7 @@ const Backoffice = () => {
           setIsToastOpen={setIsToastOpen}
         />
       )}
-      <BackofficeComponent />
+      {dataGuests ? <BackofficeComponent dataGuests={dataGuests} /> : "no data"}
     </section>
   );
 };
