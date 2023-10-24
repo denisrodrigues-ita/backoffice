@@ -41,7 +41,7 @@ const Toast: React.FC<ToastProps> = ({ message, status, setIsToastOpen }) => {
   return (
     <div
       id="toast-default"
-      className={`absolute flex items-center w-full max-w-xs p-4 ${bg200} ${text800} rounded shadow top-20 right-8 animate__animated animate__slideInRight`}
+      className={`absolute flex items-center w-full max-w-xs p-4 ${bg200} ${text800} rounded-lg shadow top-20 right-8 animate__animated animate__slideInRight`}
       role="alert"
     >
       <div

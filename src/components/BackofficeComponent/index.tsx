@@ -1,15 +1,9 @@
 import React from "react";
-import { Card, Table } from "..";
+import { Table } from "..";
 import { DataGuestsProps } from "@/interfaces";
 
-const BackofficeComponent: React.FC<DataGuestsProps> = ({dataGuests}) => {
-  console.log(dataGuests)
-  return (
-    <>
-      <Card />
-      <Table />
-    </>
-  );
+const BackofficeComponent: React.FC<DataGuestsProps> = ({ dataGuests }) => {
+  return <Table dataGuests={dataGuests} />;
 };
 
 export default BackofficeComponent;

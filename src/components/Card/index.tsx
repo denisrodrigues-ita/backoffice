@@ -9,7 +9,7 @@ const testeCard = {
 const Card = () => {
   return (
     <div className="grid grid-cols-2 gap-4 my-8">
-      <div className="border-gray-light dark:border-gray-dark border-2 rounded flex gap-4 p-4">
+      <div className="border-gray-light dark:border-gray-dark border-2 rounded-lg flex gap-4 p-4">
         <div className="self-center">
           <MdPeopleAlt size={50} />
         </div>
@@ -18,7 +18,7 @@ const Card = () => {
           <p className="card-p">{testeCard.convidados_total}</p>
         </div>
       </div>
-      <div className="border-gray-light dark:border-gray-dark border-2 rounded flex gap-4 p-4">
+      <div className="border-gray-light dark:border-gray-dark border-2 rounded-lg flex gap-4 p-4">
         <div className="self-center">
           <MdPlaylistAddCheck size={50} />
         </div>

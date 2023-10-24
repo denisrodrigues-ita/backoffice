@@ -38,7 +38,7 @@ const Header = () => {
         <button
           onClick={handleDropdown}
           type="button"
-          className="flex gap-2 items-center py-2 px-4 bg-blue-light-100 dark:bg-gray-dark rounded text-white-light dark:text-black-dark font-bold shadow"
+          className="flex gap-2 items-center py-2 px-4 bg-blue-light-50 dark:bg-gray-dark rounded-lg text-white-light dark:text-black-dark font-bold shadow"
         >
           User name{" "}
           <FiChevronDown

@@ -2,8 +2,14 @@
 
 import React from "react";
 import { api } from "@/services";
-import { BackofficeComponent, Loading, Toast } from "@/components";
-import { DataGuestsProps, StatusProps } from "@/interfaces";
+import {
+  AddGuest,
+  BackofficeComponent,
+  Card,
+  Loading,
+  Toast,
+} from "@/components";
+import { StatusProps } from "@/interfaces";
 
 const Backoffice = () => {
   const [isToastOpen, setIsToastOpen] = React.useState(false);
@@ -47,6 +53,8 @@ const Backoffice = () => {
           setIsToastOpen={setIsToastOpen}
         />
       )}
+      <Card />
+      <AddGuest />
       {dataGuests ? <BackofficeComponent dataGuests={dataGuests} /> : "no data"}
     </section>
   );
