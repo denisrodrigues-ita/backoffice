@@ -6,7 +6,6 @@ const DdevSVG = (props: any) => (
       textAlign: "center",
       width: "12rem",
       height: "8rem",
-      fill: "#f7f3d5",
     }}
     {...props}
   >

@@ -1,0 +1,30 @@
+import { DataGuestsProps } from "@/interfaces";
+import React from "react";
+import { MdPeopleAlt, MdPlaylistAddCheck } from "react-icons/md";
+
+const Card: React.FC<DataGuestsProps> = ({ dataGuests }) => {
+  return (
+    <div className="grid grid-cols-2 gap-4 my-8">
+      <div className="border-gray-light dark:border-gray-dark border-2 rounded-lg flex gap-4 p-4">
+        <div className="self-center">
+          <MdPeopleAlt size={50} />
+        </div>
+        <div>
+          <h4>Convidados</h4>
+          <p className="card-p">{dataGuests.totalGuests}</p>
+        </div>
+      </div>
+      <div className="border-gray-light dark:border-gray-dark border-2 rounded-lg flex gap-4 p-4">
+        <div className="self-center">
+          <MdPlaylistAddCheck size={50} />
+        </div>
+        <div>
+          <h4>Confirmados</h4>
+          <p className="card-p">{dataGuests.attendanceCount}</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Card;
