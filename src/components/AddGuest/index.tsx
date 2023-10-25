@@ -1,10 +1,50 @@
+import { StatusProps } from "@/interfaces";
+import { api } from "@/services";
 import React from "react";
+import { Toast } from "..";
 
 const AddGuest = () => {
   const [isOpenModal, setIsOpenModal] = React.useState(false);
+  const [guestName, setGuestName] = React.useState("");
+  const [isToastOpen, setIsToastOpen] = React.useState(false);
+  const [message, setMessage] = React.useState("");
+  const [status, setStatus] = React.useState<StatusProps["status"]>("success");
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const shortid = require("shortid");
+
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsToastOpen(false);
+    }, 3000);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [isToastOpen]);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    await handleFetch();
+  };
+
+  const handleFetch = async () => {
+    try {
+      const { response, result } = await api.createGuest({
+        name: guestName,
+        engaged_id: 1,
+        code: shortid.generate().substring(0, 6),
+      });
+      if (response.ok) {
+        setIsToastOpen(true);
+        setMessage(`${result.name} cadastrado com sucesso!`);
+        setStatus("success");
+        setGuestName("");
+        return;
+      }
+    } catch (error) {
+      setIsToastOpen(true);
+      setMessage("Ops, algo deu errado!");
+      setStatus("error");
+    }
   };
 
   return (
@@ -63,15 +103,17 @@ const AddGuest = () => {
               >
                 <div>
                   <label
-                    htmlFor="email"
+                    htmlFor="guestName"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Nome do Convidado
                   </label>
                   <input
+                    value={guestName}
+                    onChange={(e) => setGuestName(e.target.value)}
                     type="text"
-                    name="text"
-                    id="email"
+                    name="guestName"
+                    id="guestName"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                     placeholder="Digite aqui"
                     required
@@ -88,6 +130,13 @@ const AddGuest = () => {
           </div>
         </div>
       </div>
+      {isToastOpen && (
+        <Toast
+          message={message}
+          status={status}
+          setIsToastOpen={setIsToastOpen}
+        />
+      )}
     </>
   );
 };

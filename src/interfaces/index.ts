@@ -8,7 +8,11 @@ export interface StatusProps {
 }
 
 export interface DataGuestsProps {
-  dataGuests: BackofficeProps[];
+  dataGuests: {
+    guests: BackofficeProps[];
+    totalGuests: number;
+    attendanceCount: number;
+  };
 }
 
 export interface BackofficeProps {

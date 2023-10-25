@@ -41,7 +41,7 @@ const Toast: React.FC<ToastProps> = ({ message, status, setIsToastOpen }) => {
   return (
     <div
       id="toast-default"
-      className={`absolute flex items-center w-full max-w-xs p-4 ${bg200} ${text800} rounded-lg shadow top-20 right-8 animate__animated animate__slideInRight`}
+      className={`absolute flex items-center w-full max-w-xs p-4 ${bg200} ${text800} rounded-lg shadow top-20 right-8 z-50 animate__animated animate__slideInRight`}
       role="alert"
     >
       <div
@@ -76,9 +76,9 @@ const Toast: React.FC<ToastProps> = ({ message, status, setIsToastOpen }) => {
         >
           <path
             stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
             d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
           />
         </svg>

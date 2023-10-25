@@ -2,7 +2,7 @@ import React from "react";
 import statusEnum from "@/enums/stautsEnum";
 import { DataGuestsProps } from "@/interfaces";
 
-const Table: React.FC<DataGuestsProps> = ({ dataGuests }) => {
+const Table: React.FC<DataGuestsProps> = ({ dataGuests}) => {
   const renderBadge = (confirmado: boolean) => {
     if (confirmado) {
       return (
@@ -29,27 +29,30 @@ const Table: React.FC<DataGuestsProps> = ({ dataGuests }) => {
             <th scope="col" className="px-6 py-3">
               Presença
             </th>
-
+            <th scope="col" className="px-6 py-3">
+              Código
+            </th>
             <th scope="col" className="px-6 py-3">
               Ação
             </th>
           </tr>
         </thead>
         <tbody>
-          {dataGuests.map((convidado, index) => (
+          {dataGuests.guests.map((guest, index) => (
             <tr
               key={index}
               className="odd:bg-slate-100 border-b odd:dark:bg-slate-800 dark:border-gray-700"
             >
               <th
                 scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white uppercase"
               >
-                {convidado.name}
+                {guest.name}
               </th>
               <td className="px-6 py-4">
-                {renderBadge(convidado.attendance_status)}
+                {renderBadge(guest.attendance_status)}
               </td>
+              <td className="px-6 py-4">{guest.code}</td>
               <td className="px-6 py-4">
                 <a
                   href="#"

@@ -2,7 +2,6 @@
 
 import React from "react";
 import Link from "next/link";
-import { routes } from "@/json";
 import { DdevSVG } from "@/assets";
 import { FiChevronDown } from "react-icons/fi";
 import { ToggleTheme } from "..";
@@ -24,17 +23,6 @@ const Header = () => {
             className="fill-black dark:fill-white"
           />
         </Link>
-        <nav className="flex gap-4">
-          <ul className="flex gap-4">
-            {routes.map(({ route, title }) => (
-              <li key={title}>
-                <Link className="li-a" href={route}>
-                  {title}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
         <button
           onClick={handleDropdown}
           type="button"
