@@ -4,11 +4,11 @@
 
 @layer base {
   body {
-    @apply container bg-white-light dark:bg-black-dark text-blue-light-100 dark:text-gray-dark transition-all duration-500 ease-in;
+    @apply container bg-white-light dark:bg-black-dark text-blue-light-50 dark:text-gray-dark transition-all duration-500 ease-in;
   }
 
   header {
-    @apply mt-4;
+    @apply my-4;
   }
 
   h4 {
