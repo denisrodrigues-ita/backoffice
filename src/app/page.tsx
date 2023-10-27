@@ -22,6 +22,7 @@ const Home = () => {
     isOpenModal: false,
     guestName: "",
     attendanceStatus: false,
+    code: "",
   });
 
   React.useEffect(() => {

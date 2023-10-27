@@ -13,6 +13,7 @@ export interface ModalProps {
       isOpenModal: boolean;
       guestName: string;
       attendanceStatus: boolean;
+      code: string;
     }>
   >;
 }
@@ -42,5 +43,6 @@ export interface ModalChangeStatusProps {
     isOpenModal: boolean;
     guestName: string;
     attendanceStatus: boolean;
+    code: string;
   };
 }

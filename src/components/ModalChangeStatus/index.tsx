@@ -1,11 +1,30 @@
 import React from "react";
-
+import statusEnum from "@/enums/stautsEnum";
 import { ModalProps, ModalChangeStatusProps } from "@/interfaces";
+import { api } from "@/services";
+import { Loading, Toast } from "..";
 
 const ModalChangeStatus: React.FC<ModalChangeStatusProps & ModalProps> = ({
   propsModal,
   setPropsModal,
 }) => {
+  const [isUpdatingStatus, setIsUpdatingStatus] = React.useState(false);
+
+  const fetchChangeStatus = async () => {
+    setIsUpdatingStatus(true);
+    try {
+      const response = await api.changeStatusGuest(
+        propsModal.code,
+        !propsModal.attendanceStatus
+      );
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setPropsModal((prev) => ({ ...prev, isOpenModal: false }));
+      setIsUpdatingStatus(false);
+    }
+  };
+
   return (
     <div
       id="popup-modal"
@@ -17,7 +36,10 @@ const ModalChangeStatus: React.FC<ModalChangeStatusProps & ModalProps> = ({
       <div className="relative w-full max-w-md max-h-full">
         <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
           <button
-            onClick={() => setPropsModal({ ...propsModal, isOpenModal: false })}
+            disabled={isUpdatingStatus}
+            onClick={() =>
+              setPropsModal((prev) => ({ ...prev, isOpenModal: false }))
+            }
             type="button"
             className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
             data-modal-hide="popup-modal"
@@ -56,13 +78,16 @@ const ModalChangeStatus: React.FC<ModalChangeStatusProps & ModalProps> = ({
               />
             </svg>
             <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-              {`Você tem certeza que deseja alterar o status de ${
-                propsModal.guestName
-              } para ${
-                propsModal.attendanceStatus ? "Pendente" : "Confirmado"
-              }?`}
+              {`Você tem certeza que deseja alterar o status de ${propsModal.guestName.toUpperCase()} para ${
+                propsModal.attendanceStatus
+                  ? statusEnum.PENDENTE.toLocaleUpperCase()
+                  : statusEnum.CONFIRMADO.toUpperCase()
+              }?`}{" "}
+              {isUpdatingStatus && <Loading />}
             </h3>
             <button
+              disabled={isUpdatingStatus}
+              onClick={() => fetchChangeStatus()}
               data-modal-hide="popup-modal"
               type="button"
               className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
@@ -70,8 +95,9 @@ const ModalChangeStatus: React.FC<ModalChangeStatusProps & ModalProps> = ({
               Alterar
             </button>
             <button
+              disabled={isUpdatingStatus}
               onClick={() =>
-                setPropsModal({ ...propsModal, isOpenModal: false })
+                setPropsModal((prev) => ({ ...prev, isOpenModal: false }))
               }
               data-modal-hide="popup-modal"
               type="button"

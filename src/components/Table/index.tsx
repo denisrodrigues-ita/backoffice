@@ -63,6 +63,7 @@ const Table: React.FC<DataGuestsProps & ModalProps> = ({
                       isOpenModal: true,
                       guestName: guest.name,
                       attendanceStatus: guest.attendance_status,
+                      code: guest.code,
                     })
                   }
                   className="font-medium text-blue-600 dark:text-blue-500 hover:underline"

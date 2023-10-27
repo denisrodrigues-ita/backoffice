@@ -40,6 +40,25 @@ const api = {
       throw error;
     }
   },
+
+  async changeStatusGuest(code: string, status: boolean) {
+    try {
+      const response = await fetch(`${BASE_URL}/${code}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ attendance_status: status }),
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const result = await response.json();
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  },
 };
 
 export default api;
