@@ -1,8 +1,11 @@
 import React from "react";
 import statusEnum from "@/enums/stautsEnum";
-import { DataGuestsProps } from "@/interfaces";
+import { DataGuestsProps, ModalProps } from "@/interfaces";
 
-const Table: React.FC<DataGuestsProps> = ({ dataGuests}) => {
+const Table: React.FC<DataGuestsProps & ModalProps> = ({
+  dataGuests,
+  setPropsModal,
+}) => {
   const renderBadge = (confirmado: boolean) => {
     if (confirmado) {
       return (
@@ -54,12 +57,18 @@ const Table: React.FC<DataGuestsProps> = ({ dataGuests}) => {
               </td>
               <td className="px-6 py-4">{guest.code}</td>
               <td className="px-6 py-4">
-                <a
-                  href="#"
+                <button
+                  onClick={() =>
+                    setPropsModal({
+                      isOpenModal: true,
+                      guestName: guest.name,
+                      attendanceStatus: guest.attendance_status,
+                    })
+                  }
                   className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                 >
                   Alterar
-                </a>
+                </button>
               </td>
             </tr>
           ))}

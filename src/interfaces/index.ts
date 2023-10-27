@@ -7,6 +7,16 @@ export interface StatusProps {
   status: "success" | "error" | "warning" | "info";
 }
 
+export interface ModalProps {
+  setPropsModal: React.Dispatch<
+    React.SetStateAction<{
+      isOpenModal: boolean;
+      guestName: string;
+      attendanceStatus: boolean;
+    }>
+  >;
+}
+
 export interface DataGuestsProps {
   dataGuests: {
     guests: BackofficeProps[];
@@ -25,4 +35,12 @@ export interface BackofficeProps {
   message: string;
   name: string;
   update_at: string;
+}
+
+export interface ModalChangeStatusProps {
+  propsModal: {
+    isOpenModal: boolean;
+    guestName: string;
+    attendanceStatus: boolean;
+  };
 }

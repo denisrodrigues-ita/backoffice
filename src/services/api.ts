@@ -7,7 +7,7 @@ const api = {
   ) {
     try {
       setIsLoading(true);
-      const response = await fetch(`${BASE_URL}/${engaged_id}`, {
+      const response: Response = await fetch(`${BASE_URL}/${engaged_id}`, {
         method: "GET",
       });
       if (!response.ok) {
