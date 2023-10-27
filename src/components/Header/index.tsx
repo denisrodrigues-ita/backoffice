@@ -20,7 +20,7 @@ const Header = () => {
         <Link href="/">
           <DdevSVG
             style={{ width: "12rem", height: "4rem" }}
-            className="fill-black dark:fill-white"
+            className="fill-blue-light-50 dark:fill-white-light"
           />
         </Link>
         <button

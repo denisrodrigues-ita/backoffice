@@ -7,7 +7,7 @@ const api = {
   ) {
     try {
       setIsLoading(true);
-      const response = await fetch(`${BASE_URL}/${engaged_id}`, {
+      const response: Response = await fetch(`${BASE_URL}/${engaged_id}`, {
         method: "GET",
       });
       if (!response.ok) {
@@ -36,6 +36,25 @@ const api = {
       }
       const result = await response.json();
       return { response, result };
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async changeStatusGuest(code: string, status: boolean) {
+    try {
+      const response = await fetch(`${BASE_URL}/${code}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ attendance_status: status }),
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const result = await response.json();
+      return result;
     } catch (error) {
       throw error;
     }
