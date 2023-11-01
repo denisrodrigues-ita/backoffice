@@ -9,3 +9,4 @@ export { default as AddGuest } from "./AddGuest";
 export { default as NoData } from "./NoData";
 export { default as ModalChangeStatus } from "./ModalChangeStatus";
 export { default as Dropdown } from "./Dropdown";
+export { default as PrintTable } from "./PrintTable";

@@ -50,3 +50,7 @@ export interface ModalChangeStatusProps {
     dropdownIndex: number;
   };
 }
+
+export interface PrintTableProps {
+  onClick: () => void;
+}

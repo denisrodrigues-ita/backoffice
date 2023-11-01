@@ -10,7 +10,6 @@ import { Dropdown } from "@/components";
 const Table: React.FC<
   DataGuestsProps & ModalProps & ModalChangeStatusProps
 > = ({ dataGuests, setPropsModal, propsModal }) => {
-
   const openDropdown = (index: number) => {
     if (propsModal.dropdownIndex === index) {
       setPropsModal((prev) => ({ ...prev, dropdownIndex: -1 }));
@@ -39,18 +38,10 @@ const Table: React.FC<
       <table className="w-full text-sm text-left text-gray-light dark:text-gray-dark">
         <thead className="text-xs text-gray-light uppercase bg-white-light dark:bg-black-dark dark:text-gray-dark">
           <tr>
-            <th scope="col" className="px-6 py-3">
-              Nome
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Presença
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Código
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Ação
-            </th>
+            <th scope="col">Nome</th>
+            <th scope="col">Presença</th>
+            <th scope="col" className="print:hidden">Código</th>
+            <th scope="col" className="print:hidden">Ação</th>
           </tr>
         </thead>
         <tbody>
@@ -62,16 +53,15 @@ const Table: React.FC<
             >
               <th
                 scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white uppercase"
+                className=" font-medium text-gray-900 whitespace-nowrap dark:text-white uppercase"
               >
                 {guest.name}
               </th>
-              <td className="px-6 py-4">
-                {renderBadge(guest.attendance_status)}
-              </td>
-              <td className="px-6 py-4">{guest.code}</td>
-              <td className="px-6 py-4 relative">
+              <td>{renderBadge(guest.attendance_status)}</td>
+              <td className="print:hidden">{guest.code}</td>
+              <td className="relative">
                 <button
+                  className="font-medium text-blue-600 dark:text-blue-500 hover:underline p-0"
                   onClick={() => {
                     setPropsModal((prev) => ({
                       ...prev,
@@ -81,7 +71,6 @@ const Table: React.FC<
                     }));
                     openDropdown(index);
                   }}
-                  className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                 >
                   Alterar
                 </button>

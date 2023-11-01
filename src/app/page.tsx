@@ -7,6 +7,7 @@ import {
   Card,
   Loading,
   ModalChangeStatus,
+  PrintTable,
   Table,
   Toast,
 } from "@/components";
@@ -52,6 +53,10 @@ const Home = () => {
     fetchGuests();
   }, []);
 
+  const handleImprimir = () => {
+    window.print();
+  };
+
   if (isLoading) return <Loading />;
   return (
     <section>
@@ -63,9 +68,16 @@ const Home = () => {
         />
       )}
       {dataGuests && <Card dataGuests={dataGuests} />}
-      <AddGuest />
+      <div className="flex gap-4 mb-4">
+        <AddGuest />
+        <PrintTable onClick={handleImprimir} />
+      </div>
       {dataGuests && (
-        <Table dataGuests={dataGuests} setPropsModal={setPropsModal} propsModal={propsModal} />
+        <Table
+          dataGuests={dataGuests}
+          setPropsModal={setPropsModal}
+          propsModal={propsModal}
+        />
       )}
       <ModalChangeStatus
         propsModal={propsModal}

@@ -53,7 +53,7 @@ const AddGuest = () => {
         onClick={() => setIsOpenModal(true)}
         data-modal-target="authentication-modal"
         data-modal-toggle="authentication-modal"
-        className="block text-white-light bg-blue-light-50 hover:bg-blue-light-100 rounded-lg text-sm px-5 py-2.5 text-center dark:bg-gold-dark dark:text-black-dark dark:hover:bg-gold-dark/80 font-medium mb-4"
+        className="btn1"
         type="button"
       >
         Add Convidado
