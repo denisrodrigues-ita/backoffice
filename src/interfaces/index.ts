@@ -14,6 +14,8 @@ export interface ModalProps {
       guestName: string;
       attendanceStatus: boolean;
       code: string;
+      changeOn: string;
+      dropdownIndex: number;
     }>
   >;
 }
@@ -44,5 +46,7 @@ export interface ModalChangeStatusProps {
     guestName: string;
     attendanceStatus: boolean;
     code: string;
+    changeOn: string;
+    dropdownIndex: number;
   };
 }

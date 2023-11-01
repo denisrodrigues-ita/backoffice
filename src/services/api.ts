@@ -59,6 +59,25 @@ const api = {
       throw error;
     }
   },
+
+  async changeGuestName(code: string, newName: string) {
+    try {
+      const response = await fetch(`${BASE_URL}/${code}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name: newName }),
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const result = await response.json();
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  },
 };
 
 export default api;

@@ -23,6 +23,8 @@ const Home = () => {
     guestName: "",
     attendanceStatus: false,
     code: "",
+    changeOn: "",
+    dropdownIndex: -1,
   });
 
   React.useEffect(() => {
@@ -63,9 +65,12 @@ const Home = () => {
       {dataGuests && <Card dataGuests={dataGuests} />}
       <AddGuest />
       {dataGuests && (
-        <Table dataGuests={dataGuests} setPropsModal={setPropsModal} />
+        <Table dataGuests={dataGuests} setPropsModal={setPropsModal} propsModal={propsModal} />
       )}
-      <ModalChangeStatus propsModal={propsModal} setPropsModal={setPropsModal} />
+      <ModalChangeStatus
+        propsModal={propsModal}
+        setPropsModal={setPropsModal}
+      />
     </section>
   );
 };

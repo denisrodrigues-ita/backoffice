@@ -1,11 +1,24 @@
 import React from "react";
 import statusEnum from "@/enums/stautsEnum";
-import { DataGuestsProps, ModalProps } from "@/interfaces";
+import {
+  DataGuestsProps,
+  ModalProps,
+  ModalChangeStatusProps,
+} from "@/interfaces";
+import { Dropdown } from "@/components";
 
-const Table: React.FC<DataGuestsProps & ModalProps> = ({
-  dataGuests,
-  setPropsModal,
-}) => {
+const Table: React.FC<
+  DataGuestsProps & ModalProps & ModalChangeStatusProps
+> = ({ dataGuests, setPropsModal, propsModal }) => {
+
+  const openDropdown = (index: number) => {
+    if (propsModal.dropdownIndex === index) {
+      setPropsModal((prev) => ({ ...prev, dropdownIndex: -1 }));
+    } else {
+      setPropsModal((prev) => ({ ...prev, dropdownIndex: index }));
+    }
+  };
+
   const renderBadge = (confirmado: boolean) => {
     if (confirmado) {
       return (
@@ -44,7 +57,8 @@ const Table: React.FC<DataGuestsProps & ModalProps> = ({
           {dataGuests.guests.map((guest, index) => (
             <tr
               key={index}
-              className="odd:bg-slate-100 border-b odd:dark:bg-slate-800 dark:border-gray-700"
+              className="odd:bg-slate-100 border-b odd:dark:bg-gray-800 dark:border-gray-700
+               hover:bg-slate-200 dark:hover:bg-gray-600"
             >
               <th
                 scope="row"
@@ -56,20 +70,24 @@ const Table: React.FC<DataGuestsProps & ModalProps> = ({
                 {renderBadge(guest.attendance_status)}
               </td>
               <td className="px-6 py-4">{guest.code}</td>
-              <td className="px-6 py-4">
+              <td className="px-6 py-4 relative">
                 <button
-                  onClick={() =>
-                    setPropsModal({
-                      isOpenModal: true,
+                  onClick={() => {
+                    setPropsModal((prev) => ({
+                      ...prev,
                       guestName: guest.name,
                       attendanceStatus: guest.attendance_status,
                       code: guest.code,
-                    })
-                  }
+                    }));
+                    openDropdown(index);
+                  }}
                   className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                 >
                   Alterar
                 </button>
+                {propsModal.dropdownIndex === index && (
+                  <Dropdown setPropsModal={setPropsModal} />
+                )}
               </td>
             </tr>
           ))}
