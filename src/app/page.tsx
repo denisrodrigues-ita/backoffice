@@ -3,9 +3,10 @@
 import React from "react";
 import { api } from "@/services";
 import { StatusProps } from "@/interfaces";
-import { Input, Button, Loading } from "@/components/atoms";
-import { Card, Toast } from "@/components/molecules";
+import { Button, Loading } from "@/components/atoms";
+import { Card, Toast, CustomInput } from "@/components/molecules";
 import { AddGuest, ModalChangeStatus, Table } from "@/components/organisms";
+import { AiOutlineSearch } from "react-icons/ai";
 
 const Home = () => {
   const [isLoading, setIsLoading] = React.useState(false);
@@ -66,12 +67,14 @@ const Home = () => {
       <div className="flex gap-4 mb-4">
         <AddGuest />
         <Button onClick={handleImprimir} />
-        <Input
+        <CustomInput
           type="text"
           onChange={setSearch}
           value={search}
           placeholder="Pesquisar..."
-        />
+        >
+          <AiOutlineSearch className="mx-2" size={20} />
+        </CustomInput>
       </div>
       {dataGuests && (
         <Table

@@ -65,3 +65,7 @@ export interface InputProps {
 export interface SearchProps {
   search: string;
 }
+
+export interface LabelProps {
+  children: React.ReactNode;
+}
