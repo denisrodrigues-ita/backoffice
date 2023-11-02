@@ -1,7 +1,7 @@
 import { StatusProps } from "@/interfaces";
 import { api } from "@/services";
 import React from "react";
-import { Toast } from "..";
+import { Toast } from "@/components/molecules";
 
 const AddGuest = () => {
   const [isOpenModal, setIsOpenModal] = React.useState(false);

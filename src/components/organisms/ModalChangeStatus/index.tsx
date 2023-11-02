@@ -2,7 +2,7 @@ import React from "react";
 import statusEnum from "@/enums/stautsEnum";
 import { ModalProps, ModalChangeStatusProps } from "@/interfaces";
 import { api } from "@/services";
-import { Loading } from "..";
+import { Loading } from "@/components/atoms";
 
 const ModalChangeStatus: React.FC<ModalChangeStatusProps & ModalProps> = ({
   propsModal,

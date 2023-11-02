@@ -6,7 +6,7 @@ import {
   ModalChangeStatusProps,
   SearchProps,
 } from "@/interfaces";
-import { Dropdown } from "@/components";
+import { Dropdown } from "@/components/molecules";
 
 const Table: React.FC<
   DataGuestsProps & ModalProps & ModalChangeStatusProps & SearchProps

@@ -2,17 +2,10 @@
 
 import React from "react";
 import { api } from "@/services";
-import {
-  AddGuest,
-  Button,
-  Card,
-  Input,
-  Loading,
-  ModalChangeStatus,
-  Table,
-  Toast,
-} from "@/components";
 import { StatusProps } from "@/interfaces";
+import { Input, Button, Loading } from "@/components/atoms";
+import { Card, Toast } from "@/components/molecules";
+import { AddGuest, ModalChangeStatus, Table } from "@/components/organisms";
 
 const Home = () => {
   const [isLoading, setIsLoading] = React.useState(false);
@@ -73,7 +66,12 @@ const Home = () => {
       <div className="flex gap-4 mb-4">
         <AddGuest />
         <Button onClick={handleImprimir} />
-        <Input type="text" onChange={setSearch} value={search} placeholder="Pesquisar..." />
+        <Input
+          type="text"
+          onChange={setSearch}
+          value={search}
+          placeholder="Pesquisar..."
+        />
       </div>
       {dataGuests && (
         <Table

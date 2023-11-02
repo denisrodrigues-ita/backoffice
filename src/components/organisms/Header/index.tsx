@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { DdevSVG } from "@/assets";
 import { FiChevronDown } from "react-icons/fi";
-import { ToggleTheme } from "..";
+import { ToggleTheme } from "@/components/molecules";
 
 const Header = () => {
   const [isOpenDropdown, setIsOpenDropdown] = React.useState(false);

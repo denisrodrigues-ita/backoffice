@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Footer, Header } from "@/components";
+import { Footer, Header } from "@/components/organisms";
 import "./globals.css";
 
 export const metadata: Metadata = {
