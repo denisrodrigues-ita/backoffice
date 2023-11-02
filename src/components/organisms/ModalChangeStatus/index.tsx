@@ -2,26 +2,39 @@ import React from "react";
 import statusEnum from "@/enums/stautsEnum";
 import { ModalProps, ModalChangeStatusProps } from "@/interfaces";
 import { api } from "@/services";
-import { Loading, Toast } from "..";
+import { Loading } from "@/components/atoms";
 
 const ModalChangeStatus: React.FC<ModalChangeStatusProps & ModalProps> = ({
   propsModal,
   setPropsModal,
 }) => {
   const [isUpdatingStatus, setIsUpdatingStatus] = React.useState(false);
+  const [newName, setNewName] = React.useState("");
 
   const fetchChangeStatus = async () => {
     setIsUpdatingStatus(true);
-    try {
-      const response = await api.changeStatusGuest(
-        propsModal.code,
-        !propsModal.attendanceStatus
-      );
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setPropsModal((prev) => ({ ...prev, isOpenModal: false }));
-      setIsUpdatingStatus(false);
+    if (propsModal.changeOn === "name") {
+      try {
+        const response = await api.changeGuestName(propsModal.code, newName);
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setPropsModal((prev) => ({ ...prev, isOpenModal: false }));
+        setIsUpdatingStatus(false);
+        setNewName("");
+      }
+    } else {
+      try {
+        const response = await api.changeStatusGuest(
+          propsModal.code,
+          !propsModal.attendanceStatus
+        );
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setPropsModal((prev) => ({ ...prev, isOpenModal: false }));
+        setIsUpdatingStatus(false);
+      }
     }
   };
 
@@ -78,13 +91,24 @@ const ModalChangeStatus: React.FC<ModalChangeStatusProps & ModalProps> = ({
               />
             </svg>
             <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-              {`Você tem certeza que deseja alterar o status de ${propsModal.guestName.toUpperCase()} para ${
-                propsModal.attendanceStatus
-                  ? statusEnum.PENDENTE.toLocaleUpperCase()
-                  : statusEnum.CONFIRMADO.toUpperCase()
-              }?`}{" "}
+              {propsModal.changeOn === "name"
+                ? `Você esta alterando o nome de ${propsModal.guestName.toLocaleUpperCase()}!`
+                : `Você tem certeza que deseja alterar o status de ${propsModal.guestName.toUpperCase()} para ${
+                    propsModal.attendanceStatus
+                      ? statusEnum.PENDENTE.toLocaleUpperCase()
+                      : statusEnum.CONFIRMADO.toUpperCase()
+                  }?`}{" "}
               {isUpdatingStatus && <Loading />}
             </h3>
+            {propsModal.changeOn === "name" && (
+              <input
+                className="block w-full px-4 py-2.5 text-gray-700 bg-white border border-gray-300 rounded-lg dark:bg-gray-600 dark:text-gray-300 dark:border-gray-500 my-4"
+                type="text"
+                placeholder="Digite o novo nome"
+                value={newName}
+                onChange={(e) => setNewName(e.target.value)}
+              />
+            )}
             <button
               disabled={isUpdatingStatus}
               onClick={() => fetchChangeStatus()}

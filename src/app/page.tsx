@@ -2,15 +2,10 @@
 
 import React from "react";
 import { api } from "@/services";
-import {
-  AddGuest,
-  Card,
-  Loading,
-  ModalChangeStatus,
-  Table,
-  Toast,
-} from "@/components";
 import { StatusProps } from "@/interfaces";
+import { Input, Button, Loading } from "@/components/atoms";
+import { Card, Toast } from "@/components/molecules";
+import { AddGuest, ModalChangeStatus, Table } from "@/components/organisms";
 
 const Home = () => {
   const [isLoading, setIsLoading] = React.useState(false);
@@ -23,7 +18,10 @@ const Home = () => {
     guestName: "",
     attendanceStatus: false,
     code: "",
+    changeOn: "",
+    dropdownIndex: -1,
   });
+  const [search, setSearch] = React.useState("");
 
   React.useEffect(() => {
     const timer = setTimeout(() => {
@@ -50,6 +48,10 @@ const Home = () => {
     fetchGuests();
   }, []);
 
+  const handleImprimir = () => {
+    window.print();
+  };
+
   if (isLoading) return <Loading />;
   return (
     <section>
@@ -61,11 +63,28 @@ const Home = () => {
         />
       )}
       {dataGuests && <Card dataGuests={dataGuests} />}
-      <AddGuest />
+      <div className="flex gap-4 mb-4">
+        <AddGuest />
+        <Button onClick={handleImprimir} />
+        <Input
+          type="text"
+          onChange={setSearch}
+          value={search}
+          placeholder="Pesquisar..."
+        />
+      </div>
       {dataGuests && (
-        <Table dataGuests={dataGuests} setPropsModal={setPropsModal} />
+        <Table
+          dataGuests={dataGuests}
+          setPropsModal={setPropsModal}
+          propsModal={propsModal}
+          search={search}
+        />
       )}
-      <ModalChangeStatus propsModal={propsModal} setPropsModal={setPropsModal} />
+      <ModalChangeStatus
+        propsModal={propsModal}
+        setPropsModal={setPropsModal}
+      />
     </section>
   );
 };

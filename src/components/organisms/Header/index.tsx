@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { DdevSVG } from "@/assets";
 import { FiChevronDown } from "react-icons/fi";
-import { ToggleTheme } from "..";
+import { ToggleTheme } from "@/components/molecules";
 
 const Header = () => {
   const [isOpenDropdown, setIsOpenDropdown] = React.useState(false);
@@ -26,7 +26,7 @@ const Header = () => {
         <button
           onClick={handleDropdown}
           type="button"
-          className="flex gap-2 items-center py-2 px-4 bg-blue-light-50 dark:bg-gray-dark rounded-lg text-white-light dark:text-black-dark font-bold shadow"
+          className="btn1"
         >
           User name{" "}
           <FiChevronDown

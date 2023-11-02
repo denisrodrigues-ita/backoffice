@@ -4,7 +4,7 @@ import { MdPeopleAlt, MdPlaylistAddCheck } from "react-icons/md";
 
 const Card: React.FC<DataGuestsProps> = ({ dataGuests }) => {
   return (
-    <div className="grid grid-cols-2 gap-4 my-8">
+    <div className="card">
       <div className="border-gray-light dark:border-gray-dark border-2 rounded-lg flex gap-4 p-4">
         <div className="self-center">
           <MdPeopleAlt size={50} />

@@ -14,6 +14,8 @@ export interface ModalProps {
       guestName: string;
       attendanceStatus: boolean;
       code: string;
+      changeOn: string;
+      dropdownIndex: number;
     }>
   >;
 }
@@ -44,5 +46,22 @@ export interface ModalChangeStatusProps {
     guestName: string;
     attendanceStatus: boolean;
     code: string;
+    changeOn: string;
+    dropdownIndex: number;
   };
+}
+
+export interface PrintTableProps {
+  onClick: () => void;
+}
+
+export interface InputProps {
+  type: string;
+  value: string;
+  placeholder: string;
+  onChange: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export interface SearchProps {
+  search: string;
 }

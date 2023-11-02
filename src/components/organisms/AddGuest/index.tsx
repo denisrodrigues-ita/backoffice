@@ -1,7 +1,7 @@
 import { StatusProps } from "@/interfaces";
 import { api } from "@/services";
 import React from "react";
-import { Toast } from "..";
+import { Toast } from "@/components/molecules";
 
 const AddGuest = () => {
   const [isOpenModal, setIsOpenModal] = React.useState(false);
@@ -53,7 +53,7 @@ const AddGuest = () => {
         onClick={() => setIsOpenModal(true)}
         data-modal-target="authentication-modal"
         data-modal-toggle="authentication-modal"
-        className="block text-white-light bg-blue-light-50 hover:bg-blue-light-100 rounded-lg text-sm px-5 py-2.5 text-center dark:bg-gold-dark dark:text-black-dark dark:hover:bg-gold-dark/80 font-medium mb-4"
+        className="btn1"
         type="button"
       >
         Add Convidado
@@ -68,11 +68,11 @@ const AddGuest = () => {
         }`}
       >
         <div className="relative w-full max-w-md max-h-full">
-          <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
+          <div className="relative bg-white-light rounded-lg shadow dark:bg-gray-700">
             <button
               onClick={() => setIsOpenModal(false)}
               type="button"
-              className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+              className="absolute top-3 right-2.5 text-blue-light-50 dark:text-white-light bg-transparent hover:bg-gray-200 rounded-lg text-sm w-12 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600"
               data-modal-hide="authentication-modal"
             >
               <svg
@@ -93,7 +93,7 @@ const AddGuest = () => {
               <span className="sr-only">Close modal</span>
             </button>
             <div className="px-6 py-6 lg:px-8">
-              <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">
+              <h3 className="mb-4 text-xl font-medium text-blue-light-50 dark:text-white">
                 Cadastrar Convidado
               </h3>
               <form
@@ -104,7 +104,7 @@ const AddGuest = () => {
                 <div>
                   <label
                     htmlFor="guestName"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    className="block mb-2 text-sm font-medium text-blue-light-50 dark:text-white"
                   >
                     Nome do Convidado
                   </label>
@@ -114,14 +114,14 @@ const AddGuest = () => {
                     type="text"
                     name="guestName"
                     id="guestName"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                    className="bg-gray-50 border border-gray-300 text-blue-light-50 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                     placeholder="Digite aqui"
                     required
                   />
                 </div>
                 <button
                   type="submit"
-                  className="w-full text-white-light bg-blue-light-50 hover:bg-blue-light-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 "
+                  className="w-full text-white-light bg-blue-light-50 hover:bg-blue-light-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-800 dark:hover:bg-blue-700 "
                 >
                   Cadastrar
                 </button>

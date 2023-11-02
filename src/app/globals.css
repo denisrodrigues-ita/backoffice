@@ -8,7 +8,7 @@
   }
 
   header {
-    @apply my-4;
+    @apply print:hidden my-4;
   }
 
   h4 {
@@ -18,9 +18,33 @@
   li {
     @apply hover:scale-105 transition-all duration-100 ease-in-out px-4 py-2;
   }
+
+  button {
+    @apply print:hidden px-4 py-2 rounded-lg font-medium;
+  }
+
+  td {
+    @apply p-4;
+  }
+
+  th {
+    @apply p-4;
+  }
 }
 
 @layer components {
+  .btn1 {
+    @apply print:hidden flex gap-2 items-center bg-blue-light-50 dark:bg-gold-dark text-white-light dark:text-black-dark shadow;
+  }
+
+  .btn2 {
+    @apply print:hidden text-blue-light-50 bg-transparent border-2 border-blue-light-50 hover:border-blue-light-100 hover:text-blue-light-100 text-center dark:bg-black-dark dark:text-gray-dark dark:border-gray-dark;
+  }
+
+  .card {
+    @apply grid grid-cols-2 gap-4 my-8;
+  }
+
   .card-p {
     @apply text-lg font-bold;
   }
