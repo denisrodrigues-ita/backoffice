@@ -54,3 +54,14 @@ export interface ModalChangeStatusProps {
 export interface PrintTableProps {
   onClick: () => void;
 }
+
+export interface InputProps {
+  type: string;
+  value: string;
+  placeholder: string;
+  onChange: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export interface SearchProps {
+  search: string;
+}

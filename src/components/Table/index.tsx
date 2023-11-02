@@ -4,12 +4,13 @@ import {
   DataGuestsProps,
   ModalProps,
   ModalChangeStatusProps,
+  SearchProps,
 } from "@/interfaces";
 import { Dropdown } from "@/components";
 
 const Table: React.FC<
-  DataGuestsProps & ModalProps & ModalChangeStatusProps
-> = ({ dataGuests, setPropsModal, propsModal }) => {
+  DataGuestsProps & ModalProps & ModalChangeStatusProps & SearchProps
+> = ({ dataGuests, setPropsModal, propsModal, search }) => {
   const openDropdown = (index: number) => {
     if (propsModal.dropdownIndex === index) {
       setPropsModal((prev) => ({ ...prev, dropdownIndex: -1 }));
@@ -40,46 +41,52 @@ const Table: React.FC<
           <tr>
             <th scope="col">Nome</th>
             <th scope="col">Presença</th>
-            <th scope="col" className="print:hidden">Código</th>
-            <th scope="col" className="print:hidden">Ação</th>
+            <th scope="col" className="print:hidden">
+              Código
+            </th>
+            <th scope="col" className="print:hidden">
+              Ação
+            </th>
           </tr>
         </thead>
         <tbody>
-          {dataGuests.guests.map((guest, index) => (
-            <tr
-              key={index}
-              className="odd:bg-slate-100 border-b odd:dark:bg-gray-800 dark:border-gray-700
+          {dataGuests.guests
+            .filter((guest) => guest.name.includes(search))
+            .map((guest, index) => (
+              <tr
+                key={index}
+                className="odd:bg-slate-100 border-b odd:dark:bg-gray-800 dark:border-gray-700
                hover:bg-slate-200 dark:hover:bg-gray-600"
-            >
-              <th
-                scope="row"
-                className=" font-medium text-gray-900 whitespace-nowrap dark:text-white uppercase"
               >
-                {guest.name}
-              </th>
-              <td>{renderBadge(guest.attendance_status)}</td>
-              <td className="print:hidden">{guest.code}</td>
-              <td className="relative">
-                <button
-                  className="font-medium text-blue-600 dark:text-blue-500 hover:underline p-0"
-                  onClick={() => {
-                    setPropsModal((prev) => ({
-                      ...prev,
-                      guestName: guest.name,
-                      attendanceStatus: guest.attendance_status,
-                      code: guest.code,
-                    }));
-                    openDropdown(index);
-                  }}
+                <th
+                  scope="row"
+                  className=" font-medium text-gray-900 whitespace-nowrap dark:text-white uppercase"
                 >
-                  Alterar
-                </button>
-                {propsModal.dropdownIndex === index && (
-                  <Dropdown setPropsModal={setPropsModal} />
-                )}
-              </td>
-            </tr>
-          ))}
+                  {guest.name}
+                </th>
+                <td>{renderBadge(guest.attendance_status)}</td>
+                <td className="print:hidden">{guest.code}</td>
+                <td className="relative">
+                  <button
+                    className="font-medium text-blue-600 dark:text-blue-500 hover:underline p-0"
+                    onClick={() => {
+                      setPropsModal((prev) => ({
+                        ...prev,
+                        guestName: guest.name,
+                        attendanceStatus: guest.attendance_status,
+                        code: guest.code,
+                      }));
+                      openDropdown(index);
+                    }}
+                  >
+                    Alterar
+                  </button>
+                  {propsModal.dropdownIndex === index && (
+                    <Dropdown setPropsModal={setPropsModal} />
+                  )}
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>
