@@ -1,7 +1,7 @@
 import { PrintTableProps } from "@/interfaces";
 import React from "react";
 
-const PrintTable: React.FC<PrintTableProps> = ({ onClick }) => {
+const Button: React.FC<PrintTableProps> = ({ onClick }) => {
   return (
     <button
       className="btn2"
@@ -12,4 +12,4 @@ const PrintTable: React.FC<PrintTableProps> = ({ onClick }) => {
   );
 };
 
-export default PrintTable;
+export default Button;

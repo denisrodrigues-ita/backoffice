@@ -4,10 +4,11 @@ import React from "react";
 import { api } from "@/services";
 import {
   AddGuest,
+  Button,
   Card,
+  Input,
   Loading,
   ModalChangeStatus,
-  PrintTable,
   Table,
   Toast,
 } from "@/components";
@@ -27,6 +28,7 @@ const Home = () => {
     changeOn: "",
     dropdownIndex: -1,
   });
+  const [search, setSearch] = React.useState("");
 
   React.useEffect(() => {
     const timer = setTimeout(() => {
@@ -70,13 +72,15 @@ const Home = () => {
       {dataGuests && <Card dataGuests={dataGuests} />}
       <div className="flex gap-4 mb-4">
         <AddGuest />
-        <PrintTable onClick={handleImprimir} />
+        <Button onClick={handleImprimir} />
+        <Input type="text" onChange={setSearch} value={search} placeholder="Pesquisar..." />
       </div>
       {dataGuests && (
         <Table
           dataGuests={dataGuests}
           setPropsModal={setPropsModal}
           propsModal={propsModal}
+          search={search}
         />
       )}
       <ModalChangeStatus
