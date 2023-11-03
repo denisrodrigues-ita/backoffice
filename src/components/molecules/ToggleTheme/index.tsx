@@ -19,7 +19,7 @@ const ToggleTheme = () => {
   };
 
   return (
-    <label htmlFor="theme" className={`${styles.theme} print:flex-none`}>
+    <label htmlFor="theme" className={`${styles.theme} print:flex-none my-auto self-end sm:self-start`}>
       <span className={`${styles.theme__toggleWrap}`}>
         <input
           id="theme"

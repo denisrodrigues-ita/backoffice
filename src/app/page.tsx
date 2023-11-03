@@ -64,7 +64,7 @@ const Home = () => {
         />
       )}
       {dataGuests && <Card dataGuests={dataGuests} />}
-      <div className="flex gap-4 mb-4">
+      <div className="flex flex-col sm:flex-row gap-4 mb-4">
         <AddGuest />
         <Button style="btn2" type="button" onClick={handlePrint}>
           Imprimir
@@ -73,7 +73,7 @@ const Home = () => {
           type="text"
           onChange={setSearch}
           value={search}
-          placeholder="Pesquisar..."
+          placeholder="Pesquisar"
           setPropsModal={setPropsModal}
         >
           <AiOutlineSearch className="mx-2" size={20} />
