@@ -12,7 +12,7 @@ const CustomInput: React.FC<InputProps & LabelProps & ModalProps> = ({
 }) => {
   return (
     <div className="print:hidden flex justify-between items-center 
-    border-2 border-blue-light-50 dark:border-gray-dark rounded-lg w-1/3">
+    border-2 border-blue-light-50 dark:border-gray-dark rounded-lg w-full lg:w-1/2 xl:w-1/3">
       <Label>
         <Input
           type={type}

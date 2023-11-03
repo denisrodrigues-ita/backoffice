@@ -37,7 +37,7 @@ const Table: React.FC<
   return (
     <div className="overflow-x-auto shadow-md sm:rounded">
       <table className="w-full text-sm text-left text-gray-light dark:text-gray-dark">
-        <thead className="text-xs text-gray-light uppercase bg-white-light dark:bg-black-dark dark:text-gray-dark">
+        <thead className="hidden sm:table-header-group text-xs text-gray-light uppercase bg-white-light dark:bg-black-dark dark:text-gray-dark">
           <tr>
             <th scope="col">#</th>
             <th scope="col">Nome</th>
@@ -56,19 +56,22 @@ const Table: React.FC<
             .map((guest, index) => (
               <tr
                 key={index}
-                className="odd:bg-slate-100 border-b odd:dark:bg-gray-800 dark:border-gray-700
-               hover:bg-slate-200 dark:hover:bg-gray-600"
+                className="trBody"
               >
-                <th>{index + 1}</th>
+                <th className="row-start-1 col-start-3">{index + 1}</th>
                 <th
                   scope="row"
-                  className=" font-medium text-gray-900 whitespace-nowrap dark:text-white uppercase"
+                  className="row-span-2 row-start-1 col-start-1 font-medium text-gray-900 whitespace-nowrap dark:text-white uppercase"
                 >
                   {guest.name}
                 </th>
-                <td>{renderBadge(guest.attendance_status)}</td>
-                <td className="print:hidden">{guest.code}</td>
-                <td>
+                <td className="row-start-2 col-start-1">
+                  {renderBadge(guest.attendance_status)}
+                </td>
+                <td className="row-start-3 col-start-1 print:hidden">
+                  {guest.code}
+                </td>
+                <td className="row-start-2 col-start-3">
                   <button
                     className="font-medium text-blue-600 dark:text-blue-500 hover:underline p-0"
                     onClick={() => {
