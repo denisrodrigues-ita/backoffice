@@ -1,13 +1,10 @@
-import { PrintTableProps } from "@/interfaces";
 import React from "react";
+import { ButtonProps } from "@/interfaces";
 
-const Button: React.FC<PrintTableProps> = ({ onClick }) => {
+const Button: React.FC<ButtonProps> = ({ onClick, children, type, style }) => {
   return (
-    <button
-      className="btn2"
-      onClick={onClick}
-    >
-      Imprimir Lista
+    <button type={type} className={style} onClick={onClick}>
+      {children}
     </button>
   );
 };
