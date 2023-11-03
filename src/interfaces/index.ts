@@ -51,8 +51,11 @@ export interface ModalChangeStatusProps {
   };
 }
 
-export interface PrintTableProps {
+export interface ButtonProps {
   onClick: () => void;
+  children: React.ReactNode;
+  type: "button" | "submit" | "reset" | undefined;
+  style: "btn1" | "btn2";
 }
 
 export interface InputProps {

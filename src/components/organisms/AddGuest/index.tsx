@@ -2,6 +2,7 @@ import { StatusProps } from "@/interfaces";
 import { api } from "@/services";
 import React from "react";
 import { Toast } from "@/components/molecules";
+import { Button } from "@/components/atoms";
 
 const AddGuest = () => {
   const [isOpenModal, setIsOpenModal] = React.useState(false);
@@ -49,15 +50,15 @@ const AddGuest = () => {
 
   return (
     <>
-      <button
+      <Button
         onClick={() => setIsOpenModal(true)}
         data-modal-target="authentication-modal"
         data-modal-toggle="authentication-modal"
-        className="btn1"
+        style="btn1"
         type="button"
       >
         Add Convidado
-      </button>
+      </Button>
 
       <div
         id="authentication-modal"

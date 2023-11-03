@@ -35,10 +35,11 @@ const Table: React.FC<
   };
 
   return (
-    <div className="relative overflow-x-auto shadow-md sm:rounded">
+    <div className="overflow-x-auto shadow-md sm:rounded">
       <table className="w-full text-sm text-left text-gray-light dark:text-gray-dark">
         <thead className="text-xs text-gray-light uppercase bg-white-light dark:bg-black-dark dark:text-gray-dark">
           <tr>
+            <th scope="col">#</th>
             <th scope="col">Nome</th>
             <th scope="col">Presença</th>
             <th scope="col" className="print:hidden">
@@ -58,6 +59,7 @@ const Table: React.FC<
                 className="odd:bg-slate-100 border-b odd:dark:bg-gray-800 dark:border-gray-700
                hover:bg-slate-200 dark:hover:bg-gray-600"
               >
+                <th>{index + 1}</th>
                 <th
                   scope="row"
                   className=" font-medium text-gray-900 whitespace-nowrap dark:text-white uppercase"
@@ -66,7 +68,7 @@ const Table: React.FC<
                 </th>
                 <td>{renderBadge(guest.attendance_status)}</td>
                 <td className="print:hidden">{guest.code}</td>
-                <td className="relative">
+                <td>
                   <button
                     className="font-medium text-blue-600 dark:text-blue-500 hover:underline p-0"
                     onClick={() => {

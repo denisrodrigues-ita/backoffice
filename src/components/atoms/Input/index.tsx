@@ -1,15 +1,17 @@
-import { InputProps } from "@/interfaces";
+import { InputProps, ModalProps } from "@/interfaces";
 import React from "react";
 
-const Input: React.FC<InputProps> = ({
+const Input: React.FC<InputProps & ModalProps> = ({
   type,
   value,
   onChange,
+  setPropsModal,
   placeholder,
 }) => {
   return (
     <input
-    className="rounded-lg p-2 w-full font-medium
+      onClick={() => setPropsModal((prev) => ({ ...prev, dropdownIndex: -1 }))}
+      className="rounded-lg p-2 w-full font-medium
     dark:bg-black-dark dark:text-gray-dark focus:outline-none"
       type={type}
       value={value}

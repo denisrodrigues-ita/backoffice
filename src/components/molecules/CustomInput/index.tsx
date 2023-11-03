@@ -1,12 +1,13 @@
 import React from "react";
-import { InputProps, LabelProps } from "@/interfaces";
+import { InputProps, LabelProps, ModalProps } from "@/interfaces";
 import { Input, Label } from "@/components/atoms";
 
-const CustomInput: React.FC<InputProps & LabelProps> = ({
+const CustomInput: React.FC<InputProps & LabelProps & ModalProps> = ({
   type,
   value,
   onChange,
   placeholder,
+  setPropsModal,
   children,
 }) => {
   return (
@@ -18,6 +19,7 @@ const CustomInput: React.FC<InputProps & LabelProps> = ({
           value={value}
           onChange={onChange}
           placeholder={placeholder}
+          setPropsModal={setPropsModal}
         />
       </Label>
       {children}

@@ -49,7 +49,7 @@ const Home = () => {
     fetchGuests();
   }, []);
 
-  const handleImprimir = () => {
+  const handlePrint = () => {
     window.print();
   };
 
@@ -66,12 +66,15 @@ const Home = () => {
       {dataGuests && <Card dataGuests={dataGuests} />}
       <div className="flex gap-4 mb-4">
         <AddGuest />
-        <Button onClick={handleImprimir} />
+        <Button style="btn2" type="button" onClick={handlePrint}>
+          Imprimir
+        </Button>
         <CustomInput
           type="text"
           onChange={setSearch}
           value={search}
           placeholder="Pesquisar..."
+          setPropsModal={setPropsModal}
         >
           <AiOutlineSearch className="mx-2" size={20} />
         </CustomInput>
