@@ -3,10 +3,10 @@
 import React from "react";
 import { api } from "@/services";
 import { Button, Loading } from "@/components/atoms";
-import { Card, CustomInput } from "@/components/molecules";
+import { Card, CustomInput, Toast } from "@/components/molecules";
 import { AddGuest, ModalChangeStatus, Table } from "@/components/organisms";
 import { AiOutlineSearch } from "react-icons/ai";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Home = () => {
@@ -72,15 +72,7 @@ const Home = () => {
         setPropsModal={setPropsModal}
         toast={toast}
       />
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        rtl={false}
-        pauseOnFocusLoss={false}
-        theme="colored"
-      />
+      <Toast />
     </section>
   );
 };
