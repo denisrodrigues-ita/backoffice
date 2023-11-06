@@ -1,25 +1,13 @@
-import { StatusProps } from "@/interfaces";
 import { api } from "@/services";
 import React from "react";
-import { Toast } from "@/components/molecules";
+import { Button } from "@/components/atoms";
+import { ToastProps } from "@/interfaces";
 
-const AddGuest = () => {
+const AddGuest: React.FC<ToastProps> = ({ toast }) => {
   const [isOpenModal, setIsOpenModal] = React.useState(false);
   const [guestName, setGuestName] = React.useState("");
-  const [isToastOpen, setIsToastOpen] = React.useState(false);
-  const [message, setMessage] = React.useState("");
-  const [status, setStatus] = React.useState<StatusProps["status"]>("success");
 
   const shortid = require("shortid");
-
-  React.useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsToastOpen(false);
-    }, 3000);
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [isToastOpen]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -34,30 +22,26 @@ const AddGuest = () => {
         code: shortid.generate().substring(0, 6),
       });
       if (response.ok) {
-        setIsToastOpen(true);
-        setMessage(`${result.name} cadastrado com sucesso!`);
-        setStatus("success");
         setGuestName("");
+        toast.success(`${result.name} cadastrado com sucesso!`);
         return;
       }
     } catch (error) {
-      setIsToastOpen(true);
-      setMessage("Ops, algo deu errado!");
-      setStatus("error");
+      toast.error("Ops, algo deu errado!");
     }
   };
 
   return (
     <>
-      <button
+      <Button
         onClick={() => setIsOpenModal(true)}
         data-modal-target="authentication-modal"
         data-modal-toggle="authentication-modal"
-        className="btn1"
+        style="btn1"
         type="button"
       >
         Add Convidado
-      </button>
+      </Button>
 
       <div
         id="authentication-modal"
@@ -130,13 +114,6 @@ const AddGuest = () => {
           </div>
         </div>
       </div>
-      {isToastOpen && (
-        <Toast
-          message={message}
-          status={status}
-          setIsToastOpen={setIsToastOpen}
-        />
-      )}
     </>
   );
 };

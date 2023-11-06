@@ -2,16 +2,15 @@
 
 import React from "react";
 import { api } from "@/services";
-import { StatusProps } from "@/interfaces";
-import { Input, Button, Loading } from "@/components/atoms";
-import { Card, Toast } from "@/components/molecules";
+import { Button, Loading } from "@/components/atoms";
+import { Card, CustomInput } from "@/components/molecules";
 import { AddGuest, ModalChangeStatus, Table } from "@/components/organisms";
+import { AiOutlineSearch } from "react-icons/ai";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Home = () => {
   const [isLoading, setIsLoading] = React.useState(false);
-  const [isToastOpen, setIsToastOpen] = React.useState(false);
-  const [message, setMessage] = React.useState("");
-  const [status, setStatus] = React.useState<StatusProps["status"]>("success");
   const [dataGuests, setDataGuests] = React.useState();
   const [propsModal, setPropsModal] = React.useState({
     isOpenModal: false,
@@ -24,15 +23,6 @@ const Home = () => {
   const [search, setSearch] = React.useState("");
 
   React.useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsToastOpen(false);
-    }, 3000);
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [isToastOpen]);
-
-  React.useEffect(() => {
     const fetchGuests = async () => {
       try {
         const { result, response } = await api.getGuests(1, setIsLoading);
@@ -40,38 +30,34 @@ const Home = () => {
           setDataGuests(result);
         }
       } catch (error) {
-        setIsToastOpen(true);
-        setMessage(`Ops, algo deu errado! ${error}`);
-        setStatus("error");
+        toast.error(`Ops, algo deu errado! ${error}`);
       }
     };
     fetchGuests();
   }, []);
 
-  const handleImprimir = () => {
+  const handlePrint = () => {
     window.print();
   };
 
   if (isLoading) return <Loading />;
   return (
     <section>
-      {isToastOpen && (
-        <Toast
-          message={message}
-          status={status}
-          setIsToastOpen={setIsToastOpen}
-        />
-      )}
       {dataGuests && <Card dataGuests={dataGuests} />}
-      <div className="flex gap-4 mb-4">
-        <AddGuest />
-        <Button onClick={handleImprimir} />
-        <Input
+      <div className="flex flex-col sm:flex-row gap-2 mb-4">
+        <AddGuest toast={toast} />
+        <Button style="btn2" type="button" onClick={handlePrint}>
+          Imprimir
+        </Button>
+        <CustomInput
           type="text"
           onChange={setSearch}
           value={search}
-          placeholder="Pesquisar..."
-        />
+          placeholder="Pesquisar"
+          setPropsModal={setPropsModal}
+        >
+          <AiOutlineSearch className="mx-2" size={20} />
+        </CustomInput>
       </div>
       {dataGuests && (
         <Table
@@ -84,6 +70,16 @@ const Home = () => {
       <ModalChangeStatus
         propsModal={propsModal}
         setPropsModal={setPropsModal}
+        toast={toast}
+      />
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        rtl={false}
+        pauseOnFocusLoss={false}
+        theme="colored"
       />
     </section>
   );

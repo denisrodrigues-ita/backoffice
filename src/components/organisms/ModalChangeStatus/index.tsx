@@ -1,12 +1,13 @@
 import React from "react";
 import statusEnum from "@/enums/stautsEnum";
-import { ModalProps, ModalChangeStatusProps } from "@/interfaces";
+import { ModalProps, ModalChangeStatusProps, ToastProps } from "@/interfaces";
 import { api } from "@/services";
 import { Loading } from "@/components/atoms";
 
-const ModalChangeStatus: React.FC<ModalChangeStatusProps & ModalProps> = ({
+const ModalChangeStatus: React.FC<ModalChangeStatusProps & ModalProps & ToastProps> = ({
   propsModal,
   setPropsModal,
+  toast
 }) => {
   const [isUpdatingStatus, setIsUpdatingStatus] = React.useState(false);
   const [newName, setNewName] = React.useState("");
@@ -16,8 +17,11 @@ const ModalChangeStatus: React.FC<ModalChangeStatusProps & ModalProps> = ({
     if (propsModal.changeOn === "name") {
       try {
         const response = await api.changeGuestName(propsModal.code, newName);
+        if (response) {
+          toast.success(`Nome alterado com sucesso!`);
+        }
       } catch (err) {
-        console.log(err);
+        toast.error(`Ops, algo deu errado! ${err}`);
       } finally {
         setPropsModal((prev) => ({ ...prev, isOpenModal: false }));
         setIsUpdatingStatus(false);
@@ -29,8 +33,11 @@ const ModalChangeStatus: React.FC<ModalChangeStatusProps & ModalProps> = ({
           propsModal.code,
           !propsModal.attendanceStatus
         );
+        if (response) {
+          toast.success(`Status alterado com sucesso!`);
+        }
       } catch (err) {
-        console.log(err);
+        toast.error(`Ops, algo deu errado! ${err}`);
       } finally {
         setPropsModal((prev) => ({ ...prev, isOpenModal: false }));
         setIsUpdatingStatus(false);
