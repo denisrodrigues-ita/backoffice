@@ -72,3 +72,23 @@ export interface SearchProps {
 export interface LabelProps {
   children: React.ReactNode;
 }
+
+export interface UserProps {
+  token: string;
+  user: UserDataProps;
+}
+
+export interface UserDataProps {
+  id: number;
+  groom_name: string;
+  bride_name: string;
+  email: string;
+  active: boolean;
+  role: "admin" | "client";
+  first_access: boolean;
+}
+
+export interface AppState {
+  user: UserProps | null;
+  setUser: (user: UserProps) => void;
+}
