@@ -6,7 +6,6 @@ import {
   AiOutlineAlert,
 } from "react-icons/ai";
 import { ToastProps } from "@/interfaces";
-import "animate.css";
 
 const Toast: React.FC<ToastProps> = ({ message, status, setIsToastOpen }) => {
   const statusStyles = {

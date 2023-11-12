@@ -43,7 +43,7 @@ const AddGuest = () => {
       }
     } catch (error) {
       setIsToastOpen(true);
-      setMessage("Ops, algo deu errado!");
+      setMessage(`Ops, algo deu errado! ${error}`);
       setStatus("error");
     }
   };
