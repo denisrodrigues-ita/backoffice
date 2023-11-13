@@ -24,6 +24,10 @@ const Home = () => {
   });
   const [search, setSearch] = React.useState("");
 
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.currentTarget.value);
+  };
+
   React.useEffect(() => {
     const timer = setTimeout(() => {
       setIsToastOpen(false);
@@ -71,10 +75,15 @@ const Home = () => {
         </Button>
         <CustomInput
           type="text"
-          onChange={setSearch}
+          onChange={(e) => handleSearch(e)}
           value={search}
           placeholder="Pesquisar"
           setPropsModal={setPropsModal}
+          onClick={() => {
+            setPropsModal((prev) => ({ ...prev, dropdownIndex: -1 }));
+          }}
+          styleProps="lg:w-1/2 xl:w-1/3"
+          stylePropsInput="ml-4 sm:ml-0 sm:placeholder:text-left sm:text-left"
         >
           <AiOutlineSearch className="mx-2" size={20} />
         </CustomInput>
