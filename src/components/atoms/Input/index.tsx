@@ -1,22 +1,27 @@
-import { InputProps, ModalProps } from "@/interfaces";
+import { InputProps } from "@/interfaces";
 import React from "react";
 
-const Input: React.FC<InputProps & ModalProps> = ({
+const Input: React.FC<InputProps> = ({
   type,
   value,
   onChange,
-  setPropsModal,
+  onClick,
   placeholder,
+  stylePropsInput,
 }) => {
   return (
     <input
-      onClick={() => setPropsModal((prev) => ({ ...prev, dropdownIndex: -1 }))}
-      className="rounded-lg p-2 w-full font-medium
+      onClick={() => {
+        onClick && onClick();
+      }}
+      className={`rounded-lg p-2 w-full font-medium
     dark:bg-black-dark dark:text-gray-dark focus:outline-none 
-    placeholder:text-center sm:placeholder:text-left text-center sm:text-left ml-4 sm:ml-0"
+    placeholder:text-center md:placeholder:text-left text-center md:text-left ${
+      stylePropsInput && stylePropsInput
+    }`}
       type={type}
       value={value}
-      onChange={(e) => onChange(e.target.value)}
+      onChange={(e) => onChange(e)}
       placeholder={placeholder}
     />
   );

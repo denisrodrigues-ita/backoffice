@@ -1,5 +1,5 @@
 import { StatusProps } from "@/interfaces";
-import { api } from "@/services";
+import { apiGuests } from "@/services";
 import React from "react";
 import { Toast } from "@/components/molecules";
 import { Button } from "@/components/atoms";
@@ -29,7 +29,7 @@ const AddGuest = () => {
 
   const handleFetch = async () => {
     try {
-      const { response, result } = await api.createGuest({
+      const { response, result } = await apiGuests.createGuest({
         name: guestName,
         engaged_id: 1,
         code: shortid.generate().substring(0, 6),

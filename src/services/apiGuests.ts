@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:3001/guests";
+const url = process.env.BASE_URL;
 
 const api = {
   async getGuests(
@@ -7,7 +7,7 @@ const api = {
   ) {
     try {
       setIsLoading(true);
-      const response: Response = await fetch(`${BASE_URL}/${engaged_id}`, {
+      const response: Response = await fetch(`${url}/guests/${engaged_id}`, {
         method: "GET",
       });
       if (!response.ok) {
@@ -24,7 +24,7 @@ const api = {
 
   async createGuest(data: any) {
     try {
-      const response = await fetch(BASE_URL, {
+      const response = await fetch(`${url}/guests`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -44,7 +44,7 @@ const api = {
 
   async changeStatusGuest(code: string, status: boolean) {
     try {
-      const response = await fetch(`${BASE_URL}/${code}`, {
+      const response = await fetch(`${url}/guests/${code}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -63,7 +63,7 @@ const api = {
 
   async changeGuestName(code: string, newName: string) {
     try {
-      const response = await fetch(`${BASE_URL}/${code}`, {
+      const response = await fetch(`${url}/guests/${code}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

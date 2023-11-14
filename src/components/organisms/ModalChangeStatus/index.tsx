@@ -1,7 +1,7 @@
 import React from "react";
 import statusEnum from "@/enums/stautsEnum";
 import { ModalProps, ModalChangeStatusProps } from "@/interfaces";
-import { api } from "@/services";
+import { apiGuests } from "@/services";
 import { Loading } from "@/components/atoms";
 
 const ModalChangeStatus: React.FC<ModalChangeStatusProps & ModalProps> = ({
@@ -15,7 +15,7 @@ const ModalChangeStatus: React.FC<ModalChangeStatusProps & ModalProps> = ({
     setIsUpdatingStatus(true);
     if (propsModal.changeOn === "name") {
       try {
-        const response = await api.changeGuestName(propsModal.code, newName);
+        const response = await apiGuests.changeGuestName(propsModal.code, newName);
       } catch (err) {
         console.log(err);
       } finally {
@@ -25,7 +25,7 @@ const ModalChangeStatus: React.FC<ModalChangeStatusProps & ModalProps> = ({
       }
     } else {
       try {
-        const response = await api.changeStatusGuest(
+        const response = await apiGuests.changeStatusGuest(
           propsModal.code,
           !propsModal.attendanceStatus
         );
