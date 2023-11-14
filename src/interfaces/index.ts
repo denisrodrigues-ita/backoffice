@@ -88,6 +88,8 @@ export interface UserDataProps {
   active: boolean;
   role: "admin" | "client";
   first_access: boolean;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface AppState {

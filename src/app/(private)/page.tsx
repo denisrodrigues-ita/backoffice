@@ -1,14 +1,18 @@
 "use client";
 
 import React from "react";
-import { api } from "@/services";
+import { apiGuests } from "@/services";
 import { StatusProps } from "@/interfaces";
 import { Button, Loading } from "@/components/atoms";
 import { Card, Toast, CustomInput } from "@/components/molecules";
 import { AddGuest, ModalChangeStatus, Table } from "@/components/organisms";
 import { AiOutlineSearch } from "react-icons/ai";
+import { useStore } from "@/store";
 
 const Home = () => {
+  const { user } = useStore();
+  console.log(user);
+
   const [isLoading, setIsLoading] = React.useState(false);
   const [isToastOpen, setIsToastOpen] = React.useState(false);
   const [message, setMessage] = React.useState("");
@@ -37,10 +41,22 @@ const Home = () => {
     };
   }, [isToastOpen]);
 
+  const idLocalStorage = () => {
+    const id = localStorage.getItem("id");
+    if (id !== null && typeof parseInt(id) === "number") {
+      return parseInt(id);
+    }
+
+    return 0;
+  };
+
   React.useEffect(() => {
     const fetchGuests = async () => {
       try {
-        const { result, response } = await api.getGuests(1, setIsLoading);
+        const { result, response } = await apiGuests.getGuests(
+          idLocalStorage(),
+          setIsLoading
+        );
         if (response.ok) {
           setDataGuests(result);
         }
