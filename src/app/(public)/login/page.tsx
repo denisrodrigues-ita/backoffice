@@ -2,11 +2,13 @@
 
 import React from "react";
 import { WeddingSVG } from "@/assets";
-import { CustomInput } from "@/components/molecules";
+import { CustomInput, Toast } from "@/components/molecules";
 import { Button } from "@/components/atoms";
 import { apiAuth } from "@/services";
 import { useStore } from "@/store";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const { setUser, user } = useStore();
@@ -33,6 +35,7 @@ const Login = () => {
     );
 
     if (!response?.ok) {
+      toast.error("Email ou senha incorretos!");
       return;
     }
 
@@ -80,6 +83,7 @@ const Login = () => {
           </fieldset>
         </form>
       </div>
+      <Toast />
     </section>
   );
 };

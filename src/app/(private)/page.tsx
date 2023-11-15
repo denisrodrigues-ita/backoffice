@@ -2,7 +2,6 @@
 
 import React from "react";
 import { apiGuests } from "@/services";
-import { StatusProps } from "@/interfaces";
 import { Button, Loading } from "@/components/atoms";
 import { Card, CustomInput, Toast } from "@/components/molecules";
 import { AddGuest, ModalChangeStatus, Table } from "@/components/organisms";

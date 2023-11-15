@@ -16,7 +16,7 @@ const apiAuth = {
         body: JSON.stringify({ email, password }),
       });
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        return { result: null, response };
       }
       const result = await response.json();
       return { result, response };
