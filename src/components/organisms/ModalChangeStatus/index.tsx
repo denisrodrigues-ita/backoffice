@@ -1,14 +1,12 @@
 import React from "react";
 import statusEnum from "@/enums/stautsEnum";
 import { ModalProps, ModalChangeStatusProps, ToastProps } from "@/interfaces";
-import { api } from "@/services";
+import { apiGuests } from "@/services";
 import { Loading } from "@/components/atoms";
 
-const ModalChangeStatus: React.FC<ModalChangeStatusProps & ModalProps & ToastProps> = ({
-  propsModal,
-  setPropsModal,
-  toast
-}) => {
+const ModalChangeStatus: React.FC<
+  ModalChangeStatusProps & ModalProps & ToastProps
+> = ({ propsModal, setPropsModal, toast }) => {
   const [isUpdatingStatus, setIsUpdatingStatus] = React.useState(false);
   const [newName, setNewName] = React.useState("");
 
@@ -16,7 +14,10 @@ const ModalChangeStatus: React.FC<ModalChangeStatusProps & ModalProps & ToastPro
     setIsUpdatingStatus(true);
     if (propsModal.changeOn === "name") {
       try {
-        const response = await api.changeGuestName(propsModal.code, newName);
+        const response = await apiGuests.changeGuestName(
+          propsModal.code,
+          newName
+        );
         if (response) {
           toast.success(`Nome alterado com sucesso!`);
         }
@@ -29,7 +30,7 @@ const ModalChangeStatus: React.FC<ModalChangeStatusProps & ModalProps & ToastPro
       }
     } else {
       try {
-        const response = await api.changeStatusGuest(
+        const response = await apiGuests.changeStatusGuest(
           propsModal.code,
           !propsModal.attendanceStatus
         );

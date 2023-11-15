@@ -1,25 +1,36 @@
 import React from "react";
-import { InputProps, LabelProps, ModalProps } from "@/interfaces";
+import { CustomInputProps } from "@/interfaces";
 import { Input, Label } from "@/components/atoms";
 
-const CustomInput: React.FC<InputProps & LabelProps & ModalProps> = ({
+const CustomInput: React.FC<CustomInputProps> = ({
   type,
   value,
   onChange,
   placeholder,
   setPropsModal,
   children,
+  onClick,
+  styleProps,
+  stylePropsInput,
 }) => {
   return (
-    <div className="print:hidden flex justify-between items-center 
-    border-2 border-blue-light-50 dark:border-gray-dark rounded-lg w-full lg:w-1/2 xl:w-1/3">
+    <div
+      className={`print:hidden flex justify-between items-center 
+    border-2 border-blue-light-50 dark:border-gray-dark rounded-lg w-full ${
+      styleProps && styleProps
+    }`}
+    >
       <Label>
         <Input
           type={type}
           value={value}
-          onChange={onChange}
+          onChange={(e) => onChange(e)}
           placeholder={placeholder}
           setPropsModal={setPropsModal}
+          onClick={() => {
+            onClick && onClick();
+          }}
+          stylePropsInput={stylePropsInput}
         />
       </Label>
       {children}

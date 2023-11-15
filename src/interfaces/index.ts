@@ -1,7 +1,7 @@
 import { Id, ToastContent, ToastOptions } from "react-toastify";
 
 export interface ModalProps {
-  setPropsModal: React.Dispatch<
+  setPropsModal?: React.Dispatch<
     React.SetStateAction<{
       isOpenModal: boolean;
       guestName: string;
@@ -51,11 +51,13 @@ export interface ButtonProps {
   style: "btn1" | "btn2";
 }
 
-export interface InputProps {
+export interface InputProps extends ModalProps {
   type: string;
   value: string;
   placeholder: string;
-  onChange: React.Dispatch<React.SetStateAction<string>>;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onClick?: () => void;
+  stylePropsInput?: string;
 }
 
 export interface SearchProps {
@@ -63,7 +65,7 @@ export interface SearchProps {
 }
 
 export interface LabelProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 export interface UserProps {
@@ -79,6 +81,8 @@ export interface UserDataProps {
   active: boolean;
   role: "admin" | "client";
   first_access: boolean;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface AppState {
@@ -88,4 +92,8 @@ export interface AppState {
 
 export interface ToastProps {
   toast: (content: ToastContent, options?: ToastOptions | undefined) => Id;
+}
+
+export interface CustomInputProps extends InputProps, LabelProps, ModalProps {
+  styleProps?: string;
 }

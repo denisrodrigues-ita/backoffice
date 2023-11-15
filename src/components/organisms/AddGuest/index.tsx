@@ -1,4 +1,5 @@
-import { api } from "@/services";
+import { StatusProps } from "@/interfaces";
+import { apiGuests } from "@/services";
 import React from "react";
 import { Button } from "@/components/atoms";
 import { ToastProps } from "@/interfaces";
@@ -16,7 +17,7 @@ const AddGuest: React.FC<ToastProps> = ({ toast }) => {
 
   const handleFetch = async () => {
     try {
-      const { response, result } = await api.createGuest({
+      const { response, result } = await apiGuests.createGuest({
         name: guestName,
         engaged_id: 1,
         code: shortid.generate().substring(0, 6),
