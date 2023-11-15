@@ -1,11 +1,4 @@
-export interface ToastProps extends StatusProps {
-  setIsToastOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  message: string;
-}
-
-export interface StatusProps {
-  status: "success" | "error" | "warning" | "info";
-}
+import { Id, ToastContent, ToastOptions } from "react-toastify";
 
 export interface ModalProps {
   setPropsModal: React.Dispatch<
@@ -91,4 +84,8 @@ export interface UserDataProps {
 export interface AppState {
   user: UserProps | null;
   setUser: (user: UserProps) => void;
+}
+
+export interface ToastProps {
+  toast: (content: ToastContent, options?: ToastOptions | undefined) => Id;
 }

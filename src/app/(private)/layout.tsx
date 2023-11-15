@@ -8,11 +8,11 @@ export default function PrivateRoutesLayout({
 }) {
   return (
     <>
-      <PrivateRoute>
+      {/* <PrivateRoute> */}
         <Header />
         <section>{children}</section>
         <Footer />
-      </PrivateRoute>
+      {/* </PrivateRoute> */}
     </>
   );
 }
