@@ -64,13 +64,13 @@ export interface SearchProps {
   search: string;
 }
 
-export interface LabelProps {
+export interface childrenlProps {
   children?: React.ReactNode;
 }
 
 export interface UserProps {
-  token: string;
-  user: UserDataProps;
+  token: string | null;
+  user: UserDataProps | null;
 }
 
 export interface UserDataProps {
@@ -94,6 +94,6 @@ export interface ToastProps {
   toast: (content: ToastContent, options?: ToastOptions | undefined) => Id;
 }
 
-export interface CustomInputProps extends InputProps, LabelProps, ModalProps {
+export interface CustomInputProps extends InputProps, childrenlProps, ModalProps {
   styleProps?: string;
 }

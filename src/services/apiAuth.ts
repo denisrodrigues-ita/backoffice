@@ -26,6 +26,28 @@ const apiAuth = {
       setIsLoading(false);
     }
   },
+
+  async userVerify(token: string | null) {
+    try {
+      const formatedToken = token?.replace(/["']/g, "");
+      const response: Response = await fetch(`${url}/user-verify`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${formatedToken}`,
+        },
+      });
+
+      if (!response.ok) {
+        return { result: null, response };
+      }
+      const result = await response.json();
+
+      return { result, response };
+    } catch (error) {
+      throw error;
+    }
+  },
 };
 
 export default apiAuth;
