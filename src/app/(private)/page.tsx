@@ -12,7 +12,6 @@ import { useStore } from "@/store";
 
 const Home = () => {
   const { user } = useStore();
-  console.log(user);
 
   const [isLoading, setIsLoading] = React.useState(false);
   const [dataGuests, setDataGuests] = React.useState();
@@ -30,20 +29,11 @@ const Home = () => {
     setSearch(e.currentTarget.value);
   };
 
-  const idLocalStorage = () => {
-    const id = localStorage.getItem("id");
-    if (id !== null && typeof parseInt(id) === "number") {
-      return parseInt(id);
-    }
-
-    return 0;
-  };
-
   React.useEffect(() => {
     const fetchGuests = async () => {
       try {
         const { result, response } = await apiGuests.getGuests(
-          idLocalStorage(),
+          user?.user?.id || 0,
           setIsLoading
         );
         if (response.ok) {

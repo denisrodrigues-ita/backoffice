@@ -41,7 +41,7 @@ const Login = () => {
 
     setUser(result);
 
-    localStorage.setItem("id", JSON.stringify(result.user.id));
+    localStorage.setItem("token", JSON.stringify(result.token));
 
     // if (result?.user.first_access) {
     //   router.push("/first-access");
