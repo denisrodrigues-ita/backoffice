@@ -28,27 +28,33 @@ const Login = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const { result, response } = await apiAuth.loginUser(
-      email,
-      password,
-      setIsLoading
-    );
 
-    if (!response?.ok) {
-      toast.error("Email ou senha incorretos!");
-      return;
+    try {
+      const { result, response } = await apiAuth.loginUser(
+        email,
+        password,
+        setIsLoading
+      );
+
+      if (!response?.ok) {
+        toast.error("Email ou senha incorretos!");
+        return;
+      }
+
+      setUser(result);
+
+      localStorage.setItem("token", JSON.stringify(result.token));
+
+      if (result?.user.first_access) {
+        router.push("/first-access");
+        return;
+      }
+
+      router.push("/");
+    } catch (error) {
+      toast.error(`Ops, algo deu errado! ${error}`);
+      console.log(error);
     }
-
-    setUser(result);
-
-    localStorage.setItem("token", JSON.stringify(result.token));
-
-    // if (result?.user.first_access) {
-    //   router.push("/first-access");
-    //   return;
-    // }
-
-    router.push("/");
   };
 
   return (

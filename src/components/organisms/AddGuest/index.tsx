@@ -1,4 +1,3 @@
-import { StatusProps } from "@/interfaces";
 import { apiGuests } from "@/services";
 import React from "react";
 import { Button } from "@/components/atoms";
@@ -28,7 +27,7 @@ const AddGuest: React.FC<ToastProps> = ({ toast }) => {
         return;
       }
     } catch (error) {
-      toast.error("Ops, algo deu errado!");
+      toast.error(`Ops, algo deu errado! ${error}`);
     }
   };
 
