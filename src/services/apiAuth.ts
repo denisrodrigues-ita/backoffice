@@ -48,6 +48,34 @@ const apiAuth = {
       throw error;
     }
   },
+
+  async firstAccess(
+    id: number,
+    password: string,
+    newPassword: string,
+    confirmPassword: string,
+    token: string
+  ) {
+    try {
+      const response: Response = await fetch(`${url}/engaged/password/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ password, newPassword, confirmPassword }),
+      });
+
+      if (!response.ok) {
+        return { result: null, response };
+      }
+      const result = await response.json();
+
+      return { result, response };
+    } catch (error) {
+      throw error;
+    }
+  },
 };
 
 export default apiAuth;

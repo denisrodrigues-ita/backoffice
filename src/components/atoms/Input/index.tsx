@@ -11,14 +11,14 @@ const Input: React.FC<InputProps> = ({
 }) => {
   return (
     <input
+      className={`rounded-lg p-2 w-full font-medium
+  dark:bg-black-dark dark:text-gray-dark focus:outline-none 
+  placeholder:text-center md:placeholder:text-left text-center md:text-left ${
+    stylePropsInput && stylePropsInput
+  }`}
       onClick={() => {
         onClick && onClick();
       }}
-      className={`rounded-lg p-2 w-full font-medium
-    dark:bg-black-dark dark:text-gray-dark focus:outline-none 
-    placeholder:text-center md:placeholder:text-left text-center md:text-left ${
-      stylePropsInput && stylePropsInput
-    }`}
       type={type}
       value={value}
       onChange={(e) => onChange(e)}
