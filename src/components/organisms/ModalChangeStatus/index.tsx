@@ -14,9 +14,17 @@ const ModalChangeStatus: React.FC<
     setIsUpdatingStatus(true);
     if (propsModal.changeOn === "name") {
       try {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          toast.error("Token não informado.");
+          return;
+        }
+
         const response = await apiGuests.changeGuestName(
           propsModal.code,
-          newName
+          newName,
+          token
         );
         if (response) {
           toast.success(`Nome alterado com sucesso!`);
@@ -30,9 +38,17 @@ const ModalChangeStatus: React.FC<
       }
     } else {
       try {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          toast.error("Token não informado.");
+          return;
+        }
+
         const response = await apiGuests.changeStatusGuest(
           propsModal.code,
-          !propsModal.attendanceStatus
+          !propsModal.attendanceStatus,
+          token
         );
         if (response) {
           toast.success(`Status alterado com sucesso!`);

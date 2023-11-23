@@ -1,7 +1,7 @@
 import { Id, ToastContent, ToastOptions } from "react-toastify";
 
 export interface ModalProps {
-  setPropsModal?: React.Dispatch<
+  setPropsModal: React.Dispatch<
     React.SetStateAction<{
       isOpenModal: boolean;
       guestName: string;

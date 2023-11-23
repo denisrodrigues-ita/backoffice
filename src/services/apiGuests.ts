@@ -42,12 +42,13 @@ const api = {
     }
   },
 
-  async changeStatusGuest(code: string, status: boolean) {
+  async changeStatusGuest(code: string, status: boolean, token: string) {
     try {
       const response = await fetch(`${url}/guests/${code}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ attendance_status: status }),
       });
@@ -61,12 +62,13 @@ const api = {
     }
   },
 
-  async changeGuestName(code: string, newName: string) {
+  async changeGuestName(code: string, newName: string, token: string) {
     try {
       const response = await fetch(`${url}/guests/${code}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ name: newName }),
       });

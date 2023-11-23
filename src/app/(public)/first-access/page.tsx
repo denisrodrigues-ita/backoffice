@@ -67,18 +67,17 @@ const FirstAccess = () => {
       toast.error("Token não informado.");
       return;
     }
-
+    
     if (newPassword.length < 6) {
       toast.error("A senha atual deve ter no mínimo 6 caracteres.");
       return;
     }
-
+    
     const { result, response } = await apiAuth.firstAccess(
-      user?.user?.id,
       password,
       newPassword,
       confirmPassword,
-      user?.token
+      user.token
     );
 
     if (response?.ok) {

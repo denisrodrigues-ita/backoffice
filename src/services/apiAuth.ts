@@ -29,12 +29,11 @@ const apiAuth = {
 
   async userVerify(token: string | null) {
     try {
-      const formatedToken = token?.replace(/["']/g, "");
       const response: Response = await fetch(`${url}/user-verify`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${formatedToken}`,
+          Authorization: `Bearer ${token}`,
         },
       });
 
@@ -50,14 +49,13 @@ const apiAuth = {
   },
 
   async firstAccess(
-    id: number,
     password: string,
     newPassword: string,
     confirmPassword: string,
     token: string
   ) {
     try {
-      const response: Response = await fetch(`${url}/engaged/password/${id}`, {
+      const response: Response = await fetch(`${url}/engaged/password/change`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
