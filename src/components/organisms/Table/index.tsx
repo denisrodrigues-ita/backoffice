@@ -7,6 +7,7 @@ import {
   SearchProps,
 } from "@/interfaces";
 import { Dropdown } from "@/components/molecules";
+import "./table.css";
 
 const Table: React.FC<
   DataGuestsProps & ModalProps & ModalChangeStatusProps & SearchProps
@@ -18,6 +19,29 @@ const Table: React.FC<
       setPropsModal((prev) => ({ ...prev, dropdownIndex: index }));
     }
   };
+
+  const dropProps = [
+    {
+      name: "Presença",
+      onClick: () =>
+        setPropsModal((prev) => ({
+          ...prev,
+          isOpenModal: true,
+          changeOn: "presence",
+          dropdownIndex: -1,
+        })),
+    },
+    {
+      name: "Nome",
+      onClick: () =>
+        setPropsModal((prev) => ({
+          ...prev,
+          isOpenModal: true,
+          changeOn: "name",
+          dropdownIndex: -1,
+        })),
+    },
+  ];
 
   const renderBadge = (confirmado: boolean) => {
     if (confirmado) {
@@ -54,10 +78,7 @@ const Table: React.FC<
           {dataGuests.guests
             .filter((guest) => guest.name.includes(search))
             .map((guest, index) => (
-              <tr
-                key={index}
-                className="trBody"
-              >
+              <tr key={index} className="trBody">
                 <th className="row-start-1 col-start-3">{index + 1}</th>
                 <th
                   scope="row"
@@ -87,7 +108,10 @@ const Table: React.FC<
                     Alterar
                   </button>
                   {propsModal.dropdownIndex === index && (
-                    <Dropdown setPropsModal={setPropsModal} />
+                    <Dropdown
+                      translate="-translate-x-32"
+                      dropdownItems={dropProps}
+                    />
                   )}
                 </td>
               </tr>

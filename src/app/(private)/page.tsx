@@ -7,8 +7,8 @@ import { Card, CustomInput, Toast } from "@/components/molecules";
 import { AddGuest, ModalChangeStatus, Table } from "@/components/organisms";
 import { AiOutlineSearch } from "react-icons/ai";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { useStore } from "@/store";
+import "react-toastify/dist/ReactToastify.css";
 
 const Home = () => {
   const { user } = useStore();

@@ -1,6 +1,7 @@
 import { DataGuestsProps } from "@/interfaces";
 import React from "react";
 import { MdPeopleAlt, MdPlaylistAddCheck } from "react-icons/md";
+import "./card.css";
 
 const Card: React.FC<DataGuestsProps> = ({ dataGuests }) => {
   return (

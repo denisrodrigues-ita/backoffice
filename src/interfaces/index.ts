@@ -51,7 +51,8 @@ export interface ButtonProps {
   style: "btn1" | "btn2";
 }
 
-export interface InputProps extends ModalProps {
+export interface InputProps {
+  setPropsModal?: ModalProps;
   type: string;
   value: string;
   placeholder: string;
@@ -94,6 +95,7 @@ export interface ToastProps {
   toast: (content: ToastContent, options?: ToastOptions | undefined) => Id;
 }
 
-export interface CustomInputProps extends InputProps, childrenlProps, ModalProps {
+export interface CustomInputProps extends InputProps, childrenlProps {
+  setPropsModal?: ModalProps;
   styleProps?: string;
 }
