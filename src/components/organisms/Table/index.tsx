@@ -5,40 +5,42 @@ import {
   ModalProps,
   ModalChangeStatusProps,
   SearchProps,
+  UserProps,
 } from "@/interfaces";
-import { Dropdown } from "@/components/molecules";
 import "./table.css";
+import { Dropdown } from "@/components/molecules";
+import initialState from "@/store/initialState";
+import router from "next/navigation";
+import { BackofficeProps, DropItems } from "@/interfaces";
 
 const Table: React.FC<
   DataGuestsProps & ModalProps & ModalChangeStatusProps & SearchProps
-> = ({ dataGuests, setPropsModal, propsModal, search }) => {
-  const openDropdown = (index: number) => {
-    if (propsModal.dropdownIndex === index) {
-      setPropsModal((prev) => ({ ...prev, dropdownIndex: -1 }));
-    } else {
-      setPropsModal((prev) => ({ ...prev, dropdownIndex: index }));
-    }
-  };
-
-  const dropProps = [
+> = ({ dataGuests, setPropsModal, search }) => {
+  const dropItems: DropItems[] = [
     {
-      name: "Presença",
-      onClick: () =>
+      name: "Nome",
+      type: "button",
+      onClick: (guest: BackofficeProps) =>
         setPropsModal((prev) => ({
           ...prev,
+          guestName: guest.name,
+          attendanceStatus: guest.attendance_status,
+          code: guest.code,
+          changeOn: "name",
           isOpenModal: true,
-          changeOn: "presence",
-          dropdownIndex: -1,
         })),
     },
     {
-      name: "Nome",
-      onClick: () =>
+      name: "Presença",
+      type: "button",
+      onClick: (guest: BackofficeProps) =>
         setPropsModal((prev) => ({
           ...prev,
+          guestName: guest.name,
+          attendanceStatus: guest.attendance_status,
+          code: guest.code,
+          changeOn: "presence",
           isOpenModal: true,
-          changeOn: "name",
-          dropdownIndex: -1,
         })),
     },
   ];
@@ -93,7 +95,13 @@ const Table: React.FC<
                   {guest.code}
                 </td>
                 <td className="row-start-2 col-start-3">
-                  <button
+                  <Dropdown
+                    style="btn1"
+                    title="Alterar"
+                    dropItems={dropItems}
+                    guest={guest}
+                  />
+                  {/* <button
                     className="font-medium text-blue-600 dark:text-blue-500 hover:underline p-0"
                     onClick={() => {
                       setPropsModal((prev) => ({
@@ -112,7 +120,7 @@ const Table: React.FC<
                       translate="-translate-x-32"
                       dropdownItems={dropProps}
                     />
-                  )}
+                  )} */}
                 </td>
               </tr>
             ))}
@@ -123,3 +131,6 @@ const Table: React.FC<
 };
 
 export default Table;
+function setUser(initialState: UserProps) {
+  throw new Error("Function not implemented.");
+}

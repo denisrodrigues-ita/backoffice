@@ -3,12 +3,10 @@ import { Id, ToastContent, ToastOptions } from "react-toastify";
 export interface ModalProps {
   setPropsModal: React.Dispatch<
     React.SetStateAction<{
-      isOpenModal: boolean;
       guestName: string;
       attendanceStatus: boolean;
       code: string;
       changeOn: string;
-      dropdownIndex: number;
     }>
   >;
 }
@@ -98,4 +96,25 @@ export interface ToastProps {
 export interface CustomInputProps extends InputProps, childrenlProps {
   setPropsModal?: ModalProps;
   styleProps?: string;
+}
+
+export interface DropItems {
+  name: string;
+  onClick?: (guest?: any) => void;
+  onChange?: () => void;
+  checked?: boolean;
+  type: "button" | "checkbox";
+}
+
+export interface DropProps {
+  title: string;
+  style: "btn1" | "btn2";
+  guest?: BackofficeProps;
+  dropItems: {
+    name: string;
+    onClick?: (guest?: BackofficeProps) => void;
+    onChange?: () => void;
+    checked?: boolean;
+    type: "button" | "checkbox";
+  }[];
 }
