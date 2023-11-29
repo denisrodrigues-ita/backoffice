@@ -4,14 +4,13 @@ import React from "react";
 import Link from "next/link";
 import { DdevSVG } from "@/assets";
 import { FiChevronDown } from "react-icons/fi";
-import { Button } from "@/components/atoms";
 import { useStore } from "@/store";
 import { Dropdown } from "@/components/molecules";
 import initialState from "@/store/initialState";
 import { useRouter } from "next/navigation";
 import { DropItems } from "@/interfaces";
 
-const Header = () => {
+const Header: React.FC = () => {
   const router = useRouter();
 
   const [isDark, setIsDark] = React.useState(false);
@@ -76,7 +75,7 @@ const Header = () => {
             />
           </Link>
           <div className="relative">
-            <Dropdown title={handleName()} style="btn1" dropItems={dropItems} />
+            <Dropdown style="btn1" dropItems={dropItems} title={handleName()}/>
           </div>
         </div>
       </div>

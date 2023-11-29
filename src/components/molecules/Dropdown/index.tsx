@@ -2,13 +2,37 @@ import React from "react";
 import { Button } from "@/components/atoms";
 import { DropProps } from "@/interfaces";
 
-const Dropdown: React.FC<DropProps> = ({ title, style, dropItems, guest }) => {
+const Dropdown: React.FC<DropProps> = ({ style, dropItems, guest, title }) => {
   const [isOpen, setIsOpen] = React.useState(false);
+  let dropdownRef = React.useRef<HTMLDivElement>(null);
+  let buttonRef = React.useRef<HTMLButtonElement>(null);
+
+  React.useEffect(() => {
+    const handleOutsideClick = (e: MouseEvent) => {
+      if (
+        !dropdownRef.current?.contains(e.target as Node) &&
+        !buttonRef.current?.contains(e.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, []);
+
+  const handleClick = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
     <>
       <Button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={handleClick}
+        buttonRef={buttonRef}
         style={style}
         data-dropdown-toggle="dropdown"
         type="button"
@@ -17,9 +41,10 @@ const Dropdown: React.FC<DropProps> = ({ title, style, dropItems, guest }) => {
       </Button>
 
       <div
+        ref={dropdownRef}
         id="dropdown"
         className={`z-10 ${
-          !isOpen && "hidden"
+          isOpen ? "" : "hidden"
         } mt-1 absolute bg-white divide-y divide-gray-100 rounded-lg shadow w-auto dark:bg-gray-700`}
       >
         <ul

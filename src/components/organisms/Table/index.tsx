@@ -48,13 +48,13 @@ const Table: React.FC<
   const renderBadge = (confirmado: boolean) => {
     if (confirmado) {
       return (
-        <span className="bg-green-200 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">
+        <span className="greenBadge">
           {statusEnum.CONFIRMADO}
         </span>
       );
     }
     return (
-      <span className="bg-yellow-200 text-yellow-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">
+      <span className="yellowBadge">
         {statusEnum.PENDENTE}
       </span>
     );
