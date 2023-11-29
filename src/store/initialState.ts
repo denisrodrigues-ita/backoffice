@@ -9,7 +9,9 @@ const initialState: UserProps = {
     email: "",
     active: false,
     role: "client",
-    first_access: false,
+    first_access: true,
+    created_at: "",
+    updated_at: "",
   },
 };
 
