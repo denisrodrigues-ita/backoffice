@@ -2,10 +2,13 @@ import { apiGuests } from "@/services";
 import React from "react";
 import { Button } from "@/components/atoms";
 import { ToastProps } from "@/interfaces";
+import { useStore } from "@/store";
 
 const AddGuest: React.FC<ToastProps> = ({ toast }) => {
   const [isOpenModal, setIsOpenModal] = React.useState(false);
   const [guestName, setGuestName] = React.useState("");
+
+  const { user } = useStore();
 
   const shortid = require("shortid");
 
@@ -18,7 +21,7 @@ const AddGuest: React.FC<ToastProps> = ({ toast }) => {
     try {
       const { response, result } = await apiGuests.createGuest({
         name: guestName,
-        engaged_id: 1,
+        engaged_id: user?.user?.id,
         code: shortid.generate().substring(0, 6),
       });
       if (response.ok) {

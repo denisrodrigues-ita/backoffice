@@ -14,13 +14,6 @@ interface EngagedProps {
 const AddEngaged: React.FC<ToastProps> = ({ toast }) => {
   const [isOpenModal, setIsOpenModal] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
-  // const [engaged, setEngaged] = React.useState<EngagedProps>({
-  //   password: "",
-  //   confirmPassword: "",
-  //   groomName: "",
-  //   brideName: "",
-  //   email: "",
-  // });
 
   const groomNameRef = React.useRef<HTMLInputElement>(null);
   const brideNameRef = React.useRef<HTMLInputElement>(null);
