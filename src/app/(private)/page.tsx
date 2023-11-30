@@ -9,6 +9,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { toast } from "react-toastify";
 import { useStore } from "@/store";
 import "react-toastify/dist/ReactToastify.css";
+import AddEngaged from "@/components/organisms/AddEngaged";
 
 const Home = () => {
   const { user } = useStore();
@@ -21,7 +22,6 @@ const Home = () => {
     attendanceStatus: false,
     code: "",
     changeOn: "",
-    dropdownIndex: -1,
   });
   const [search, setSearch] = React.useState("");
 
@@ -55,6 +55,7 @@ const Home = () => {
     <section>
       {dataGuests && <Card dataGuests={dataGuests} />}
       <div className="flex flex-col sm:flex-row gap-2 mb-4">
+        {user?.user?.role === "admin" && <AddEngaged toast={toast} />}
         <AddGuest toast={toast} />
         <Button style="btn2" type="button" onClick={handlePrint}>
           Imprimir
@@ -65,9 +66,6 @@ const Home = () => {
           value={search}
           placeholder="Pesquisar"
           setPropsModal={setPropsModal}
-          onClick={() => {
-            setPropsModal((prev) => ({ ...prev, dropdownIndex: -1 }));
-          }}
           styleProps="lg:w-1/2 xl:w-1/3"
           stylePropsInput="ml-4 sm:ml-0 sm:placeholder:text-left sm:text-left"
         >

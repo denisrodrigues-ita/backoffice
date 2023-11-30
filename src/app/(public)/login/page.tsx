@@ -53,7 +53,6 @@ const Login = () => {
       router.push("/");
     } catch (error) {
       toast.error(`Ops, algo deu errado! ${error}`);
-      console.log(error);
     }
   };
 

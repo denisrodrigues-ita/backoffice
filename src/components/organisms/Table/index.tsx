@@ -9,8 +9,6 @@ import {
 } from "@/interfaces";
 import "./table.css";
 import { Dropdown } from "@/components/molecules";
-import initialState from "@/store/initialState";
-import router from "next/navigation";
 import { BackofficeProps, DropItems } from "@/interfaces";
 
 const Table: React.FC<
@@ -47,17 +45,9 @@ const Table: React.FC<
 
   const renderBadge = (confirmado: boolean) => {
     if (confirmado) {
-      return (
-        <span className="greenBadge">
-          {statusEnum.CONFIRMADO}
-        </span>
-      );
+      return <span className="greenBadge">{statusEnum.CONFIRMADO}</span>;
     }
-    return (
-      <span className="yellowBadge">
-        {statusEnum.PENDENTE}
-      </span>
-    );
+    return <span className="yellowBadge">{statusEnum.PENDENTE}</span>;
   };
 
   return (
@@ -101,26 +91,6 @@ const Table: React.FC<
                     dropItems={dropItems}
                     guest={guest}
                   />
-                  {/* <button
-                    className="font-medium text-blue-600 dark:text-blue-500 hover:underline p-0"
-                    onClick={() => {
-                      setPropsModal((prev) => ({
-                        ...prev,
-                        guestName: guest.name,
-                        attendanceStatus: guest.attendance_status,
-                        code: guest.code,
-                      }));
-                      openDropdown(index);
-                    }}
-                  >
-                    Alterar
-                  </button>
-                  {propsModal.dropdownIndex === index && (
-                    <Dropdown
-                      translate="-translate-x-32"
-                      dropdownItems={dropProps}
-                    />
-                  )} */}
                 </td>
               </tr>
             ))}

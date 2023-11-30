@@ -1,4 +1,4 @@
-import { Id, ToastContent, ToastOptions } from "react-toastify";
+import { toast } from "react-toastify";
 
 export interface ModalProps {
   setPropsModal: React.Dispatch<
@@ -38,7 +38,6 @@ export interface ModalChangeStatusProps {
     attendanceStatus: boolean;
     code: string;
     changeOn: string;
-    dropdownIndex: number;
   };
 }
 
@@ -91,7 +90,7 @@ export interface AppState {
 }
 
 export interface ToastProps {
-  toast: (content: ToastContent, options?: ToastOptions | undefined) => Id;
+  toast: typeof toast;
 }
 
 export interface CustomInputProps extends InputProps, childrenlProps {
