@@ -1,5 +1,5 @@
 import React from "react";
-import { ButtonProps } from "@/interfaces";
+import { ButtonProps } from "./interface";
 import "./button.css";
 
 const Button: React.FC<ButtonProps> = ({
@@ -8,9 +8,11 @@ const Button: React.FC<ButtonProps> = ({
   type,
   style,
   buttonRef,
+  isLoading = false,
 }) => {
   return (
     <button
+      disabled={isLoading}
       type={type}
       className={`btn ${style}`}
       onClick={onClick}

@@ -3,7 +3,7 @@
 import React from "react";
 import { WeddingSVG } from "@/assets";
 import { CustomInput, Toast } from "@/components/molecules";
-import { Button } from "@/components/atoms";
+import { Button, Spinner } from "@/components/atoms";
 import { apiAuth } from "@/services";
 import { useStore } from "@/store";
 import { useRouter } from "next/navigation";
@@ -30,11 +30,8 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const { result, response } = await apiAuth.loginUser(
-        email,
-        password,
-        setIsLoading
-      );
+      setIsLoading(true);
+      const { result, response } = await apiAuth.loginUser(email, password);
 
       if (!response?.ok) {
         toast.error("Email ou senha incorretos!");
@@ -53,6 +50,8 @@ const Login = () => {
       router.push("/");
     } catch (error) {
       toast.error(`Ops, algo deu errado! ${error}`);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -82,8 +81,8 @@ const Login = () => {
               onChange={(e) => handleChangePassword(e)}
               placeholder="Senha"
             />
-            <Button type="submit" style="btn1" onClick={() => {}}>
-              Login
+            <Button isLoading={isLoading} type="submit" style="btn1" onClick={() => {}}>
+              {isLoading ? <Spinner /> : "Login"}
             </Button>
           </fieldset>
         </form>

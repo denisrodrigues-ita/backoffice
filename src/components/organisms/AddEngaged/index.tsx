@@ -1,6 +1,6 @@
 import { apiEngaged } from "@/services";
 import React from "react";
-import { Button } from "@/components/atoms";
+import { Button, Spinner } from "@/components/atoms";
 import { ToastProps } from "@/interfaces";
 
 interface EngagedProps {
@@ -13,7 +13,7 @@ interface EngagedProps {
 
 const AddEngaged: React.FC<ToastProps> = ({ toast }) => {
   const [isOpenModal, setIsOpenModal] = React.useState(false);
-  const [loading, setLoading] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const groomNameRef = React.useRef<HTMLInputElement>(null);
   const brideNameRef = React.useRef<HTMLInputElement>(null);
@@ -108,6 +108,7 @@ const AddEngaged: React.FC<ToastProps> = ({ toast }) => {
 
   const handleFetch = async (engaged: EngagedProps) => {
     try {
+      setIsLoading(true);
       const token = localStorage.getItem("token");
 
       if (token === null) {
@@ -117,13 +118,14 @@ const AddEngaged: React.FC<ToastProps> = ({ toast }) => {
 
       const { response, result } = await apiEngaged.createEngaged(
         engaged,
-        token,
-        setLoading
+        token
       );
 
       return { response, result };
     } catch (error) {
       toast.error(`Ops, algo deu errado! ${error}`);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -267,10 +269,11 @@ const AddEngaged: React.FC<ToastProps> = ({ toast }) => {
                   />
                 </div>
                 <button
+                  disabled={isLoading}
                   type="submit"
-                  className="w-full text-white-light bg-blue-light-50 hover:bg-blue-light-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-800 dark:hover:bg-blue-700 "
+                  className="w-full flex justify-center text-white-light bg-blue-light-50 hover:bg-blue-light-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-800 dark:hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Cadastrar
+                  {isLoading ? <Spinner /> : "Cadastrar"}
                 </button>
               </form>
             </div>
