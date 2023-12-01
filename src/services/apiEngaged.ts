@@ -9,11 +9,9 @@ const apiEngaged = {
       brideName: string;
       email: string;
     },
-    token: string,
-    setLoading: React.Dispatch<React.SetStateAction<boolean>>
+    token: string
   ) {
     try {
-      setLoading(true);
       const response: Response = await fetch(`${url}/engaged`, {
         method: "POST",
         headers: {
@@ -29,8 +27,6 @@ const apiEngaged = {
       return { response, result };
     } catch (error) {
       throw error;
-    } finally {
-      setLoading(false);
     }
   },
 };

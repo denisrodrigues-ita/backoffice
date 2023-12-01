@@ -1,12 +1,8 @@
 const url = process.env.BASE_URL;
 
 const api = {
-  async getGuests(
-    engaged_id: number,
-    setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
-  ) {
+  async getGuests(engaged_id: number) {
     try {
-      setIsLoading(true);
       const response: Response = await fetch(`${url}/guests/${engaged_id}`, {
         method: "GET",
       });
@@ -17,8 +13,6 @@ const api = {
       return { response, result };
     } catch (error) {
       throw error;
-    } finally {
-      setIsLoading(false);
     }
   },
 

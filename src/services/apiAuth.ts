@@ -1,13 +1,8 @@
 const url = process.env.BASE_URL;
 
 const apiAuth = {
-  async loginUser(
-    email: string,
-    password: string,
-    setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
-  ) {
+  async loginUser(email: string, password: string) {
     try {
-      setIsLoading(true);
       const response: Response = await fetch(`${url}/authenticate`, {
         method: "POST",
         headers: {
@@ -22,8 +17,6 @@ const apiAuth = {
       return { result, response };
     } catch (error) {
       throw error;
-    } finally {
-      setIsLoading(false);
     }
   },
 

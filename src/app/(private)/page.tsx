@@ -32,15 +32,17 @@ const Home = () => {
   React.useEffect(() => {
     const fetchGuests = async () => {
       try {
+        setIsLoading(true);
         const { result, response } = await apiGuests.getGuests(
-          user?.user?.id || 0,
-          setIsLoading
+          user?.user?.id || 0
         );
         if (response.ok) {
           setDataGuests(result);
         }
       } catch (error) {
         toast.error(`Ops, algo deu errado! ${error}`);
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchGuests();
