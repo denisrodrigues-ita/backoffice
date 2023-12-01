@@ -7,7 +7,6 @@ const CustomInput: React.FC<CustomInputProps> = ({
   value,
   onChange,
   placeholder,
-  setPropsModal,
   children,
   onClick,
   styleProps,
@@ -26,7 +25,6 @@ const CustomInput: React.FC<CustomInputProps> = ({
           value={value}
           onChange={(e) => onChange(e)}
           placeholder={placeholder}
-          setPropsModal={setPropsModal}
           onClick={() => {
             onClick && onClick();
           }}

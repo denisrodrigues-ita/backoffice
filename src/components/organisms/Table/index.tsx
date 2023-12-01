@@ -5,7 +5,6 @@ import {
   ModalProps,
   ModalChangeStatusProps,
   SearchProps,
-  UserProps,
 } from "@/interfaces";
 import "./table.css";
 import { Dropdown } from "@/components/molecules";
@@ -101,6 +100,3 @@ const Table: React.FC<
 };
 
 export default Table;
-function setUser(initialState: UserProps) {
-  throw new Error("Function not implemented.");
-}
