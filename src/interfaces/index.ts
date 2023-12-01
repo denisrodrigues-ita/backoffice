@@ -7,6 +7,7 @@ export interface ModalProps {
       attendanceStatus: boolean;
       code: string;
       changeOn: string;
+      isOpenModal: boolean;
     }>
   >;
 }

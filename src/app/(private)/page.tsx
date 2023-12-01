@@ -8,8 +8,8 @@ import { AddGuest, ModalChangeStatus, Table } from "@/components/organisms";
 import { AiOutlineSearch } from "react-icons/ai";
 import { toast } from "react-toastify";
 import { useStore } from "@/store";
-import "react-toastify/dist/ReactToastify.css";
 import AddEngaged from "@/components/organisms/AddEngaged";
+import "react-toastify/dist/ReactToastify.css";
 
 const Home = () => {
   const { user } = useStore();
@@ -67,7 +67,6 @@ const Home = () => {
           onChange={(e) => handleSearch(e)}
           value={search}
           placeholder="Pesquisar"
-          setPropsModal={setPropsModal}
           styleProps="lg:w-1/2 xl:w-1/3"
           stylePropsInput="ml-4 sm:ml-0 sm:placeholder:text-left sm:text-left"
         >
