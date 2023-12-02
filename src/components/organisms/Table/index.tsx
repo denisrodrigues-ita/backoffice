@@ -9,6 +9,7 @@ import {
 import "./table.css";
 import { Dropdown } from "@/components/molecules";
 import { BackofficeProps, DropItems } from "@/interfaces";
+import { CiCircleList } from "react-icons/ci";
 
 const Table: React.FC<
   DataGuestsProps & ModalProps & ModalChangeStatusProps & SearchProps
@@ -73,7 +74,7 @@ const Table: React.FC<
                 <th className="row-start-1 col-start-3">{index + 1}</th>
                 <th
                   scope="row"
-                  className="row-span-2 row-start-1 col-start-1 font-medium text-gray-900 whitespace-nowrap dark:text-white uppercase"
+                  className="row-span-2 row-start-1 col-start-1 font-medium whitespace-nowrap uppercase"
                 >
                   {guest.name}
                 </th>
@@ -85,8 +86,8 @@ const Table: React.FC<
                 </td>
                 <td className="row-start-2 col-start-3">
                   <Dropdown
-                    style="btn1"
-                    title="Alterar"
+                    style="btnSVG"
+                    title={<CiCircleList className="w-6 h-6" />}
                     dropItems={dropItems}
                     guest={guest}
                   />

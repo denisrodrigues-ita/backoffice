@@ -100,8 +100,8 @@ export interface DropItems {
 }
 
 export interface DropProps {
-  title: string;
-  style: "btn1" | "btn2";
+  title?: string | React.ReactNode;
+  style: "btn1" | "btn2" | "btnSVG";
   guest?: BackofficeProps;
   dropItems: {
     name: string;
