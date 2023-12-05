@@ -75,7 +75,7 @@ const Header: React.FC = () => {
             />
           </Link>
           <div className="relative">
-            <Dropdown style="btn1" dropItems={dropItems} title={handleName()}/>
+            <Dropdown style="btn1" dropItems={dropItems} title={handleName()} />
           </div>
         </div>
       </div>

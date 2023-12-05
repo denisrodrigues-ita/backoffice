@@ -2,6 +2,7 @@ import { apiEngaged } from "@/services";
 import React from "react";
 import { Button, Spinner } from "@/components/atoms";
 import { ToastProps } from "@/interfaces";
+import { Select } from "@/components/atoms";
 
 interface EngagedProps {
   password: string;
@@ -12,8 +13,22 @@ interface EngagedProps {
 }
 
 const AddEngaged: React.FC<ToastProps> = ({ toast }) => {
+  const Opcoes: {
+    value: "client" | "admin" | "Selecione um tipo de usuário";
+    selected: boolean;
+  }[] = [
+    { value: "Selecione um tipo de usuário", selected: true },
+    { value: "client", selected: false },
+    { value: "admin", selected: false },
+  ];
+
   const [isOpenModal, setIsOpenModal] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
+  const [selectedOption, setSelectedOption] = React.useState("");
+
+  const handleSelectChange = (selectedValue: string) => {
+    setSelectedOption(selectedValue);
+  };
 
   const groomNameRef = React.useRef<HTMLInputElement>(null);
   const brideNameRef = React.useRef<HTMLInputElement>(null);
@@ -67,6 +82,11 @@ const AddEngaged: React.FC<ToastProps> = ({ toast }) => {
 
     if (emailRef.current?.value === "") {
       toast.warning("E-mail não informado.");
+      return;
+    }
+
+    if (selectedOption === "Selecione um tipo de usuário") {
+      toast.warning("Selecione um tipo de usuário.");
       return;
     }
 
@@ -186,7 +206,7 @@ const AddEngaged: React.FC<ToastProps> = ({ toast }) => {
                 <div>
                   <label
                     htmlFor="groomName"
-                    className="block mb-2 text-sm font-medium text-blue-light-50 dark:text-white"
+                    className="block text-sm font-medium text-blue-light-50 dark:text-white"
                   >
                     Nome do noivo
                   </label>
@@ -203,7 +223,7 @@ const AddEngaged: React.FC<ToastProps> = ({ toast }) => {
                 <div>
                   <label
                     htmlFor="brideName"
-                    className="block mb-2 text-sm font-medium text-blue-light-50 dark:text-white"
+                    className="block text-sm font-medium text-blue-light-50 dark:text-white"
                   >
                     Nome da noiva
                   </label>
@@ -220,7 +240,7 @@ const AddEngaged: React.FC<ToastProps> = ({ toast }) => {
                 <div>
                   <label
                     htmlFor="email"
-                    className="block mb-2 text-sm font-medium text-blue-light-50 dark:text-white"
+                    className="block text-sm font-medium text-blue-light-50 dark:text-white"
                   >
                     Email
                   </label>
@@ -234,10 +254,18 @@ const AddEngaged: React.FC<ToastProps> = ({ toast }) => {
                     required
                   />
                 </div>
+                <label className="block text-sm font-medium text-blue-light-50 dark:text-white">
+                  Tipo de usuário
+                  <Select
+                    options={Opcoes}
+                    value={selectedOption}
+                    onChange={handleSelectChange}
+                  />
+                </label>
                 <div>
                   <label
                     htmlFor="password"
-                    className="block mb-2 text-sm font-medium text-blue-light-50 dark:text-white"
+                    className="block text-sm font-medium text-blue-light-50 dark:text-white"
                   >
                     Senha
                   </label>
@@ -254,7 +282,7 @@ const AddEngaged: React.FC<ToastProps> = ({ toast }) => {
                 <div>
                   <label
                     htmlFor="passwordConfirm"
-                    className="block mb-2 text-sm font-medium text-blue-light-50 dark:text-white"
+                    className="block text-sm font-medium text-blue-light-50 dark:text-white"
                   >
                     Confirmação de senha
                   </label>
