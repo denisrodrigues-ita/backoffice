@@ -9,8 +9,15 @@ import { useStore } from "@/store";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useValidation } from "@/validations";
 
 const Login = () => {
+  const {
+    register,
+    handleSubmit: onSubmit,
+    formState: { errors },
+  } = useValidation();
+
   const { setUser, user } = useStore();
   const router = useRouter();
 
@@ -81,7 +88,12 @@ const Login = () => {
               onChange={(e) => handleChangePassword(e)}
               placeholder="Senha"
             />
-            <Button isLoading={isLoading} type="submit" style="btn1" onClick={() => {}}>
+            <Button
+              isLoading={isLoading}
+              type="submit"
+              style="btn1"
+              onClick={() => {}}
+            >
               {isLoading ? <Spinner /> : "Login"}
             </Button>
           </fieldset>

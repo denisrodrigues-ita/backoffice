@@ -2,7 +2,6 @@ import React from "react";
 
 interface Option {
   value: "client" | "admin" | "Selecione um tipo de usuário";
-  selected: boolean;
 }
 
 interface SelectProps {
@@ -24,11 +23,11 @@ const Select: React.FC<SelectProps> = ({ options, onChange, value }) => {
     >
       {options.map((option) => (
         <option
-          className={`${
-            option.selected ? "text-gray-500 dark:text-gray-400" : ""
-          }`}
+          // className={`${
+          //   option.selected ? "text-gray-500 dark:text-gray-400" : ""
+          // }`}
           key={option.value}
-          selected={option.selected}
+          // selected={option.selected}
           value={option.value}
         >
           {option.value}

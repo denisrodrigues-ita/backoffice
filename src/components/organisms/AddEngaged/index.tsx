@@ -15,11 +15,10 @@ interface EngagedProps {
 const AddEngaged: React.FC<ToastProps> = ({ toast }) => {
   const Opcoes: {
     value: "client" | "admin" | "Selecione um tipo de usuário";
-    selected: boolean;
   }[] = [
-    { value: "Selecione um tipo de usuário", selected: true },
-    { value: "client", selected: false },
-    { value: "admin", selected: false },
+    { value: "Selecione um tipo de usuário" },
+    { value: "client" },
+    { value: "admin" },
   ];
 
   const [isOpenModal, setIsOpenModal] = React.useState(false);
@@ -85,7 +84,7 @@ const AddEngaged: React.FC<ToastProps> = ({ toast }) => {
       return;
     }
 
-    if (selectedOption === "Selecione um tipo de usuário") {
+    if (selectedOption !== "client" && selectedOption !== "admin") {
       toast.warning("Selecione um tipo de usuário.");
       return;
     }
