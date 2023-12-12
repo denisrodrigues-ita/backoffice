@@ -1,29 +1,38 @@
-import { InputProps } from "@/interfaces";
 import React from "react";
+import "./input.css";
 
-const Input: React.FC<InputProps> = ({
-  type,
-  value,
-  onChange,
-  onClick,
+interface CustomInputProps {
+  placeholder: string;
+  type: string;
+  label?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  register?: any;
+  value?: string;
+  variant: "login" | "search";
+}
+
+const Input: React.FC<CustomInputProps> = ({
   placeholder,
-  stylePropsInput,
+  type,
+  label,
+  register,
+  onChange,
+  value,
+  variant
 }) => {
   return (
-    <input
-      className={`rounded-lg p-2 w-full font-medium
-  dark:bg-black-dark dark:text-gray-dark focus:outline-none 
-  placeholder:text-center md:placeholder:text-left text-center md:text-left ${
-    stylePropsInput && stylePropsInput
-  }`}
-      onClick={() => {
-        onClick && onClick();
-      }}
-      type={type}
-      value={value}
-      onChange={(e) => onChange(e)}
-      placeholder={placeholder}
-    />
+    <div className="containerDiv">
+      {label && <label htmlFor={label}>{label}</label>}
+      <input
+        className={variant}
+        type={type}
+        id={label}
+        placeholder={placeholder}
+        onChange={onChange}
+        value={value}
+        {...register}
+      />
+    </div>
   );
 };
 

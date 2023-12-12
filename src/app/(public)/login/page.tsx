@@ -2,39 +2,28 @@
 
 import React from "react";
 import { WeddingSVG } from "@/assets";
-import { CustomInput, Toast } from "@/components/molecules";
-import { Button, Spinner } from "@/components/atoms";
+import { Toast } from "@/components/molecules";
+import { Button, Input, Spinner } from "@/components/atoms";
 import { apiAuth } from "@/services";
 import { useStore } from "@/store";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useValidation } from "@/validations";
+import { useFormValidations } from "@/validations/LoginValidations";
 
 const Login = () => {
-  const {
-    register,
-    handleSubmit: onSubmit,
-    formState: { errors },
-  } = useValidation();
+  const { register, handleSubmit, errors, reset } = useFormValidations({
+    isRequiredEmail: true,
+    isRequiredLoginPassword: true,
+  });
 
   const { setUser, user } = useStore();
   const router = useRouter();
 
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
 
-  const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.currentTarget.value);
-  };
-
-  const handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.currentTarget.value);
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const onSubmit = async (data: any) => {
+    const { email, loginPassword: password } = data;
 
     try {
       setIsLoading(true);
@@ -71,23 +60,40 @@ const Login = () => {
         <form
           className="flex flex-col gap-4 w-full sm:w-2/3 lg:w-1/2 xl:max-w-lg"
           action="submit"
-          onSubmit={handleSubmit}
+          onSubmit={handleSubmit(onSubmit)}
         >
           <fieldset className="flex flex-col gap-4 w-full border border-blue-light-50 p-4 rounded-lg font-medium">
             Login
-            <CustomInput
-              type="email"
-              value={email}
-              onChange={(e) => handleChangeEmail(e)}
-              placeholder="Email"
-              stylePropsInput="w-full"
-            />
-            <CustomInput
-              type="password"
-              value={password}
-              onChange={(e) => handleChangePassword(e)}
-              placeholder="Senha"
-            />
+            <div>
+              <Input
+                register={register("email")}
+                type="email"
+                placeholder="Email"
+                label="Email"
+                onChange={() => {}}
+                variant="login"
+              />
+              {errors.email && (
+                <span className="text-red-500 text-sm">
+                  {errors.email.message}
+                </span>
+              )}
+            </div>
+            <div>
+              <Input
+                register={register("loginPassword")}
+                type="password"
+                placeholder="Senha"
+                label="Senha"
+                onChange={() => {}}
+                variant="login"
+              />
+              {errors.loginPassword && (
+                <span className="text-red-500 text-sm">
+                  {errors.loginPassword.message}
+                </span>
+              )}
+            </div>
             <Button
               isLoading={isLoading}
               type="submit"

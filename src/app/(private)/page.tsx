@@ -2,7 +2,7 @@
 
 import React from "react";
 import { apiGuests } from "@/services";
-import { Button, Loading } from "@/components/atoms";
+import { Button, Input, Loading } from "@/components/atoms";
 import { Card, CustomInput, Toast } from "@/components/molecules";
 import { AddGuest, ModalChangeStatus, Table } from "@/components/organisms";
 import { AiOutlineSearch } from "react-icons/ai";
@@ -62,16 +62,13 @@ const Home = () => {
         <Button style="btn2" type="button" onClick={handlePrint}>
           Imprimir
         </Button>
-        <CustomInput
+        <Input
           type="text"
           onChange={(e) => handleSearch(e)}
           value={search}
           placeholder="Pesquisar"
-          styleProps="lg:w-1/2 xl:w-1/3"
-          stylePropsInput="ml-4 sm:ml-0 sm:placeholder:text-left sm:text-left"
-        >
-          <AiOutlineSearch className="mx-2" size={20} />
-        </CustomInput>
+          variant="search"
+        />
       </div>
       {dataGuests && (
         <Table
