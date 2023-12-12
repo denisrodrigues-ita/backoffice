@@ -43,3 +43,9 @@
     @apply p-4;
   }
 }
+
+@layer components {
+  .error {
+    @apply text-red-400 text-sm;
+  }
+}

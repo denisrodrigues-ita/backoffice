@@ -1,8 +1,9 @@
 import { apiEngaged } from "@/services";
 import React from "react";
-import { Button, Spinner } from "@/components/atoms";
+import { Button, Input, Spinner } from "@/components/atoms";
 import { ToastProps } from "@/interfaces";
 import { Select } from "@/components/atoms";
+import { useFormValidations } from "@/validations/LoginValidations";
 
 interface EngagedProps {
   password: string;
@@ -13,6 +14,14 @@ interface EngagedProps {
 }
 
 const AddEngaged: React.FC<ToastProps> = ({ toast }) => {
+  const { register, handleSubmit, errors, reset } = useFormValidations({
+    isRequiredEmail: true,
+    isRequiredPassword: true,
+    isRequiredConfirmPassword: true,
+    isRequiredGroomName: true,
+    isRequiredBrideName: true,
+  });
+
   const Opcoes: {
     value: "client" | "admin" | "Selecione um tipo de usuário";
   }[] = [
@@ -29,87 +38,15 @@ const AddEngaged: React.FC<ToastProps> = ({ toast }) => {
     setSelectedOption(selectedValue);
   };
 
-  const groomNameRef = React.useRef<HTMLInputElement>(null);
-  const brideNameRef = React.useRef<HTMLInputElement>(null);
-  const passwordRef = React.useRef<HTMLInputElement>(null);
-  const passwordConfirmRef = React.useRef<HTMLInputElement>(null);
-  const emailRef = React.useRef<HTMLInputElement>(null);
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    if (groomNameRef.current?.value === "") {
-      toast.warning("Nome do noivo não informado.");
-      return;
-    }
-
-    if (brideNameRef.current?.value === "") {
-      toast.warning("Nome da noiva não informado.");
-      return;
-    }
-
-    if (passwordRef.current?.value === "") {
-      toast.warning("Senha não informada.");
-      return;
-    }
-
-    if (
-      passwordRef.current?.value.length &&
-      passwordRef.current?.value.length < 6
-    ) {
-      toast.warning("Senha deve conter no mínimo 6 caracteres.");
-      return;
-    }
-
-    if (passwordConfirmRef.current?.value === "") {
-      toast.warning("Confirmação de senha não informada.");
-      return;
-    }
-
-    if (
-      passwordConfirmRef.current?.value &&
-      passwordConfirmRef.current?.value.length < 6
-    ) {
-      toast.warning("Confirmação de senha deve conter no mínimo 6 caracteres.");
-      return;
-    }
-
-    if (passwordRef.current?.value !== passwordConfirmRef.current?.value) {
-      toast.warning("As senhas não são iguais.");
-      return;
-    }
-
-    if (emailRef.current?.value === "") {
-      toast.warning("E-mail não informado.");
-      return;
-    }
+  const onSubmit = async (data: any) => {
+    const { groomName, brideName, password, confirmPassword, email } = data;
 
     if (selectedOption !== "client" && selectedOption !== "admin") {
       toast.warning("Selecione um tipo de usuário.");
       return;
     }
 
-    if (
-      emailRef.current?.value &&
-      !emailRef.current?.value.includes("@") &&
-      !emailRef.current?.value.includes(".")
-    ) {
-      toast.warning("E-mail inválido.");
-      return;
-    }
-
-    const groomName = groomNameRef.current?.value;
-    const brideName = brideNameRef.current?.value;
-    const password = passwordRef.current?.value;
-    const confirmPassword = passwordConfirmRef.current?.value;
-    const email = emailRef.current?.value;
-
-    if (!(groomName && brideName && password && confirmPassword && email)) {
-      toast.warning("Preencha todos os campos.");
-      return;
-    }
-
-    const data = await handleFetch({
+    const result = await handleFetch({
       groomName,
       brideName,
       password,
@@ -117,9 +54,9 @@ const AddEngaged: React.FC<ToastProps> = ({ toast }) => {
       email,
     });
 
-    if (data?.response.ok) {
+    if (result?.response.ok) {
       toast.success(
-        `${data.result.bride_name} e ${data.result.groom_name} cadastrados com sucesso!`
+        `${result.result.bride_name} e ${result.result.groom_name} cadastrados com sucesso!`
       );
       return;
     }
@@ -200,59 +137,44 @@ const AddEngaged: React.FC<ToastProps> = ({ toast }) => {
               <form
                 className="space-y-6"
                 action="submit"
-                onSubmit={handleSubmit}
+                onSubmit={handleSubmit(onSubmit)}
               >
-                <div>
-                  <label
-                    htmlFor="groomName"
-                    className="block text-sm font-medium text-blue-light-50 dark:text-white"
-                  >
-                    Nome do noivo
-                  </label>
-                  <input
-                    ref={groomNameRef}
-                    type="text"
-                    name="groomName"
-                    id="groomName"
-                    className="bg-gray-50 border border-gray-300 text-blue-light-50 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                    placeholder="Nome do noivo"
-                    required
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="brideName"
-                    className="block text-sm font-medium text-blue-light-50 dark:text-white"
-                  >
-                    Nome da noiva
-                  </label>
-                  <input
-                    ref={brideNameRef}
-                    type="text"
-                    name="brideName"
-                    id="brideName"
-                    className="bg-gray-50 border border-gray-300 text-blue-light-50 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                    placeholder="Nome da noiva"
-                    required
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-medium text-blue-light-50 dark:text-white"
-                  >
-                    Email
-                  </label>
-                  <input
-                    ref={emailRef}
-                    type="email"
-                    name="email"
-                    id="email"
-                    className="bg-gray-50 border border-gray-300 text-blue-light-50 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                    placeholder="Nome da noiva"
-                    required
-                  />
-                </div>
+                <Input
+                  register={register("groomName")}
+                  type="text"
+                  placeholder="Nome do noivo"
+                  label="Nome do noivo"
+                  onChange={() => {}}
+                  variant="login"
+                />
+                {errors.groomName && (
+                  <span className="error">{errors.groomName.message}</span>
+                )}
+
+                <Input
+                  register={register("brideName")}
+                  type="text"
+                  placeholder="Nome da noiva"
+                  label="Nome da noiva"
+                  onChange={() => {}}
+                  variant="login"
+                />
+                {errors.brideName && (
+                  <span className="error">{errors.brideName.message}</span>
+                )}
+
+                <Input
+                  register={register("email")}
+                  type="email"
+                  placeholder="Email"
+                  label="Email"
+                  onChange={() => {}}
+                  variant="login"
+                />
+                {errors.email && (
+                  <span className="error">{errors.email.message}</span>
+                )}
+
                 <label className="block text-sm font-medium text-blue-light-50 dark:text-white">
                   Tipo de usuário
                   <Select
@@ -261,40 +183,33 @@ const AddEngaged: React.FC<ToastProps> = ({ toast }) => {
                     onChange={handleSelectChange}
                   />
                 </label>
-                <div>
-                  <label
-                    htmlFor="password"
-                    className="block text-sm font-medium text-blue-light-50 dark:text-white"
-                  >
-                    Senha
-                  </label>
-                  <input
-                    ref={passwordRef}
-                    type="text"
-                    name="password"
-                    id="password"
-                    className="bg-gray-50 border border-gray-300 text-blue-light-50 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                    placeholder="Nome da noiva"
-                    required
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="passwordConfirm"
-                    className="block text-sm font-medium text-blue-light-50 dark:text-white"
-                  >
-                    Confirmação de senha
-                  </label>
-                  <input
-                    ref={passwordConfirmRef}
-                    type="text"
-                    name="passwordConfirm"
-                    id="passwordConfirm"
-                    className="bg-gray-50 border border-gray-300 text-blue-light-50 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                    placeholder="Nome da noiva"
-                    required
-                  />
-                </div>
+
+                <Input
+                  register={register("password")}
+                  type="text"
+                  placeholder="Senha"
+                  label="Senha"
+                  onChange={() => {}}
+                  variant="login"
+                />
+                {errors.password && (
+                  <span className="error">{errors.password.message}</span>
+                )}
+
+                <Input
+                  register={register("confirmPassword")}
+                  type="text"
+                  placeholder="Confirmar senha"
+                  label="Confirmar senha"
+                  onChange={() => {}}
+                  variant="login"
+                />
+                {errors.confirmPassword && (
+                  <span className="error">
+                    {errors.confirmPassword.message}
+                  </span>
+                )}
+
                 <button
                   disabled={isLoading}
                   type="submit"

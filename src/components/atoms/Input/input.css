@@ -1,9 +1,9 @@
 .containerDiv {
-  @apply flex flex-col text-blue-light-50 dark:text-gray-dark w-full;
+  @apply flex flex-col text-blue-light-50 dark:text-gray-dark w-full font-medium;
 }
 
 .login {
-  @apply rounded-lg py-2.5 px-2 text-blue-light-50 dark:text-black-dark bg-neutral-200;
+  @apply rounded-lg py-2.5 px-2 text-blue-light-50 dark:text-gray-dark bg-slate-200 dark:bg-gray-600;
 }
 
 .search {

@@ -74,7 +74,7 @@ const Login = () => {
                 variant="login"
               />
               {errors.email && (
-                <span className="text-red-500 text-sm">
+                <span className="error">
                   {errors.email.message}
                 </span>
               )}
@@ -89,7 +89,7 @@ const Login = () => {
                 variant="login"
               />
               {errors.loginPassword && (
-                <span className="text-red-500 text-sm">
+                <span className="error">
                   {errors.loginPassword.message}
                 </span>
               )}

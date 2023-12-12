@@ -1,24 +1,30 @@
+"use client";
+
 import { apiGuests } from "@/services";
 import React from "react";
-import { Button, Spinner } from "@/components/atoms";
+import { Button, Input, Spinner } from "@/components/atoms";
 import { ToastProps } from "@/interfaces";
 import { useStore } from "@/store";
+import { useFormValidations } from "@/validations/LoginValidations";
 
 const AddGuest: React.FC<ToastProps> = ({ toast }) => {
+  const { register, handleSubmit, errors, reset } = useFormValidations({
+    isRequiredGuestName: true,
+  });
+
   const [isOpenModal, setIsOpenModal] = React.useState(false);
-  const [guestName, setGuestName] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
 
   const { user } = useStore();
 
   const shortid = require("shortid");
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    await handleFetch();
+  const onSubmit = async (data: any) => {
+    const { guestName } = data;
+    await handleFetch(guestName);
   };
 
-  const handleFetch = async () => {
+  const handleFetch = async (guestName: string) => {
     try {
       setIsLoading(true);
       const { response, result } = await apiGuests.createGuest({
@@ -27,7 +33,7 @@ const AddGuest: React.FC<ToastProps> = ({ toast }) => {
         code: shortid.generate().substring(0, 6),
       });
       if (response.ok) {
-        setGuestName("");
+        reset();
         toast.success(`${result.name} cadastrado com sucesso!`);
         return;
       }
@@ -90,25 +96,20 @@ const AddGuest: React.FC<ToastProps> = ({ toast }) => {
               <form
                 className="space-y-6"
                 action="submit"
-                onSubmit={handleSubmit}
+                onSubmit={handleSubmit(onSubmit)}
               >
                 <div>
-                  <label
-                    htmlFor="guestName"
-                    className="block mb-2 text-sm font-medium text-blue-light-50 dark:text-white"
-                  >
-                    Nome do Convidado
-                  </label>
-                  <input
-                    value={guestName}
-                    onChange={(e) => setGuestName(e.target.value)}
+                  <Input
+                    register={register("guestName")}
                     type="text"
-                    name="guestName"
-                    id="guestName"
-                    className="bg-gray-50 border border-gray-300 text-blue-light-50 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                    placeholder="Digite aqui"
-                    required
+                    placeholder="Nome do convidado"
+                    label="Nome do convidado"
+                    onChange={() => {}}
+                    variant="login"
                   />
+                  {errors.guestName && (
+                    <span className="error">{errors.guestName.message}</span>
+                  )}
                 </div>
                 <button
                   disabled={isLoading}
