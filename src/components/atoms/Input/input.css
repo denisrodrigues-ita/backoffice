@@ -3,7 +3,7 @@
 }
 
 .login {
-  @apply rounded-lg py-2.5 px-2 text-blue-light-50 dark:text-gray-dark bg-slate-200 dark:bg-gray-600;
+  @apply rounded-lg py-2.5 px-2 text-blue-light-50 dark:text-gray-dark bg-slate-200 dark:bg-slate-600 border border-gray-light dark:border-neutral-400;
 }
 
 .search {

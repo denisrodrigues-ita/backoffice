@@ -7,36 +7,21 @@ import { toast } from "react-toastify";
 import { apiAuth } from "@/services";
 import { useRouter } from "next/navigation";
 import "react-toastify/dist/ReactToastify.css";
+import { useFormValidations } from "@/validations/LoginValidations";
 
 const FirstAccess = () => {
-  const passwordRef = React.useRef<HTMLInputElement>(null);
-  const newPasswordRef = React.useRef<HTMLInputElement>(null);
-  const confirmPasswordRef = React.useRef<HTMLInputElement>(null);
+  const { register, handleSubmit, errors, reset } = useFormValidations({
+    isRequiredLoginPassword: true,
+    isRequiredNewPassword: true,
+    isRequiredNewConfirmPassword: true,
+  });
 
   const router = useRouter();
 
   const { user } = useStore();
 
-  const handleinput = async (e: any) => {
-    e.preventDefault();
-    let password;
-    let newPassword;
-    let confirmPassword;
-
-    if (passwordRef.current) {
-      password = passwordRef.current.value;
-    }
-    if (newPasswordRef.current) {
-      newPassword = newPasswordRef.current.value;
-    }
-    if (confirmPasswordRef.current) {
-      confirmPassword = confirmPasswordRef.current.value;
-    }
-
-    if (newPassword !== confirmPassword) {
-      toast.error("As novas senhas não são iguais.");
-      return;
-    }
+  const handleinput = async (data: any) => {
+    const { loginPassword: password, newPassword, newConfirmPassword: confirmPassword } = data;
 
     if (user?.user?.id === undefined) {
       toast.error("Usuário não encontrado.");
@@ -48,31 +33,11 @@ const FirstAccess = () => {
       return;
     }
 
-    if (password === undefined) {
-      toast.error("Senha atual não informada.");
-      return;
-    }
-
-    if (newPassword === undefined) {
-      toast.error("Nova senha não informada.");
-      return;
-    }
-
-    if (confirmPassword === undefined) {
-      toast.error("Confirmação de senha não informada.");
-      return;
-    }
-
     if (!user?.token) {
       toast.error("Token não informado.");
       return;
     }
-    
-    if (newPassword.length < 6) {
-      toast.error("A senha atual deve ter no mínimo 6 caracteres.");
-      return;
-    }
-    
+
     const { result, response } = await apiAuth.firstAccess(
       password,
       newPassword,
@@ -94,7 +59,7 @@ const FirstAccess = () => {
         <h1>Esse é seu primeiro acesso.</h1>
         <h3>Vamos alterar sua senha para uma maior segurança, ok?</h3>
 
-        <form className="mt-8" onSubmit={handleinput}>
+        <form className="mt-8" onSubmit={handleSubmit(handleinput)}>
           <div className="mb-5">
             <label
               htmlFor="password"
@@ -103,12 +68,14 @@ const FirstAccess = () => {
               Senha atual
             </label>
             <input
-              ref={passwordRef}
               type="password"
               id="password"
               className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-              required
+              {...register("loginPassword")}
             />
+            {errors.loginPassword && (
+              <span className="error">{errors.loginPassword.message}</span>
+            )}
           </div>
           <div className="mb-5">
             <label
@@ -118,12 +85,14 @@ const FirstAccess = () => {
               Nova senha
             </label>
             <input
-              ref={newPasswordRef}
               type="password"
               id="new-password"
               className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-              required
+              {...register("newPassword")}
             />
+            {errors.newPassword && (
+              <span className="error">{errors.newPassword.message}</span>
+            )}
           </div>
           <div className="mb-5">
             <label
@@ -133,12 +102,14 @@ const FirstAccess = () => {
               Confirmar nova senha
             </label>
             <input
-              ref={confirmPasswordRef}
               type="password"
               id="repeat-password"
               className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-              required
+              {...register("newConfirmPassword")}
             />
+            {errors.newConfirmPassword && (
+              <span className="error">{errors.newConfirmPassword.message}</span>
+            )}
           </div>
           <div className="flex items-start mb-5"></div>
           <button

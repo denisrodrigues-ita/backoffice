@@ -6,9 +6,9 @@ interface CustomInputProps {
   type: string;
   label?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  register?: any;
   value?: string;
   variant: "login" | "search";
+  register?: any;
 }
 
 const Input: React.FC<CustomInputProps> = ({

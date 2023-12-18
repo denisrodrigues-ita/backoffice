@@ -12,6 +12,8 @@ interface ValidationOptions {
   isRequiredBrideName?: boolean;
   isRequiredGuestName?: boolean;
   isRequiredNewName?: boolean;
+  isRequiredNewPassword?: boolean;
+  isRequiredNewConfirmPassword?: boolean;
 }
 
 export const useFormValidations = ({
@@ -24,6 +26,8 @@ export const useFormValidations = ({
   isRequiredBrideName = false,
   isRequiredGuestName = false,
   isRequiredNewName = false,
+  isRequiredNewPassword = false,
+  isRequiredNewConfirmPassword = false,
 }: ValidationOptions) => {
   const validationSchema = Yup.object().shape({
     name: isFieldRequired(isRequiredName),
@@ -38,6 +42,14 @@ export const useFormValidations = ({
     brideName: isFieldRequired(isRequiredBrideName),
     guestName: isFieldRequired(isRequiredGuestName),
     newName: isFieldRequired(isRequiredNewName),
+    newPassword: isFieldRequired(isRequiredNewPassword).min(
+      6,
+      "Mínimo de 6 dígitos"
+    ),
+    newConfirmPassword: isFieldRequired(isRequiredNewConfirmPassword).oneOf(
+      [Yup.ref("newPassword"), null],
+      "Senhas não coincidem"
+    ),
   });
 
   const {
