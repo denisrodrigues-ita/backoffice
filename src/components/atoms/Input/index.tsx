@@ -1,24 +1,38 @@
-import { InputProps, ModalProps } from "@/interfaces";
 import React from "react";
+import "./input.css";
 
-const Input: React.FC<InputProps & ModalProps> = ({
-  type,
-  value,
-  onChange,
-  setPropsModal,
+interface CustomInputProps {
+  placeholder: string;
+  type: string;
+  label?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  value?: string;
+  variant: "login" | "search";
+  register?: any;
+}
+
+const Input: React.FC<CustomInputProps> = ({
   placeholder,
+  type,
+  label,
+  register,
+  onChange,
+  value,
+  variant
 }) => {
   return (
-    <input
-      onClick={() => setPropsModal((prev) => ({ ...prev, dropdownIndex: -1 }))}
-      className="rounded-lg p-2 w-full font-medium
-    dark:bg-black-dark dark:text-gray-dark focus:outline-none 
-    placeholder:text-center sm:placeholder:text-left text-center sm:text-left ml-4 sm:ml-0"
-      type={type}
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-      placeholder={placeholder}
-    />
+    <div className="containerDiv">
+      {label && <label htmlFor={label}>{label}</label>}
+      <input
+        className={variant}
+        type={type}
+        id={label}
+        placeholder={placeholder}
+        onChange={onChange}
+        value={value}
+        {...register}
+      />
+    </div>
   );
 };
 

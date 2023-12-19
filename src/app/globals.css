@@ -7,6 +7,22 @@
     @apply container bg-white-light dark:bg-black-dark text-blue-light-50 dark:text-gray-dark transition-all duration-500 ease-in;
   }
 
+  h1 {
+    @apply text-4xl font-bold;
+  }
+
+  h2 {
+    @apply text-3xl font-bold;
+  }
+
+  h3 {
+    @apply text-2xl font-bold;
+  }
+
+  h4 {
+    @apply text-xl font-bold;
+  }
+
   header {
     @apply print:hidden my-4;
   }
@@ -16,11 +32,7 @@
   }
 
   li {
-    @apply hover:scale-105 transition-all duration-100 ease-in-out px-4 py-2;
-  }
-
-  button {
-    @apply print:hidden px-4 py-2 rounded-lg font-medium;
+    @apply hover:scale-105 transition-all duration-100 ease-in-out px-4;
   }
 
   td {
@@ -33,27 +45,7 @@
 }
 
 @layer components {
-  .btn1 {
-    @apply print:hidden flex gap-2 items-center border-2 border-blue-light-50 dark:border-gold-dark bg-blue-light-50 dark:bg-gold-dark text-white-light dark:text-black-dark shadow;
-  }
-
-  .btn2 {
-    @apply print:hidden text-blue-light-50 bg-transparent border-2 border-blue-light-50 hover:border-blue-light-100 hover:text-blue-light-100 text-center dark:bg-black-dark dark:text-gray-dark dark:border-gray-dark;
-  }
-
-  .card {
-    @apply grid sm:grid-cols-2 gap-4 my-8;
-  }
-
-  .card-p {
-    @apply text-lg font-bold;
-  }
-
-  .li-a {
-    @apply text-lg font-bold;
-  }
-
-  .trBody {
-    @apply grid grid-rows-3 grid-cols-2 sm:table-row odd:bg-slate-100 border-b odd:dark:bg-gray-800 dark:border-gray-700;
+  .error {
+    @apply text-red-400 text-sm;
   }
 }

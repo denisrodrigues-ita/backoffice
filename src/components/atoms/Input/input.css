@@ -1,0 +1,11 @@
+.containerDiv {
+  @apply flex flex-col text-blue-light-50 dark:text-gray-dark w-full font-medium;
+}
+
+.login {
+  @apply rounded-lg py-2.5 px-2 text-blue-light-50 dark:text-gray-dark bg-slate-200 dark:bg-slate-600 border border-gray-light dark:border-neutral-400;
+}
+
+.search {
+  @apply dark:bg-black-dark rounded-lg py-2 px-2 text-blue-light-50 dark:text-gray-dark placeholder:text-center text-center border-2 border-blue-light-50 dark:border-gray-dark font-medium focus:border-transparent sm:text-left sm:placeholder:text-left w-full lg:w-1/2;
+}

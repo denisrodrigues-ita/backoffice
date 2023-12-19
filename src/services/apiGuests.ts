@@ -1,13 +1,9 @@
-const BASE_URL = "http://localhost:3001/guests";
+const url = process.env.BASE_URL;
 
 const api = {
-  async getGuests(
-    engaged_id: number,
-    setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
-  ) {
+  async getGuests(engaged_id: number) {
     try {
-      setIsLoading(true);
-      const response: Response = await fetch(`${BASE_URL}/${engaged_id}`, {
+      const response: Response = await fetch(`${url}/guests/${engaged_id}`, {
         method: "GET",
       });
       if (!response.ok) {
@@ -17,17 +13,16 @@ const api = {
       return { response, result };
     } catch (error) {
       throw error;
-    } finally {
-      setIsLoading(false);
     }
   },
 
   async createGuest(data: any) {
     try {
-      const response = await fetch(BASE_URL, {
+      const response = await fetch(`${url}/guests`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
         body: JSON.stringify(data),
       });
@@ -41,12 +36,13 @@ const api = {
     }
   },
 
-  async changeStatusGuest(code: string, status: boolean) {
+  async changeStatusGuest(code: string, status: boolean, token: string) {
     try {
-      const response = await fetch(`${BASE_URL}/${code}`, {
+      const response = await fetch(`${url}/guests/${code}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ attendance_status: status }),
       });
@@ -60,12 +56,13 @@ const api = {
     }
   },
 
-  async changeGuestName(code: string, newName: string) {
+  async changeGuestName(code: string, newName: string, token: string) {
     try {
-      const response = await fetch(`${BASE_URL}/${code}`, {
+      const response = await fetch(`${url}/guests/${code}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ name: newName }),
       });

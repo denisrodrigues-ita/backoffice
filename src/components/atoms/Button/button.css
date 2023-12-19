@@ -1,0 +1,15 @@
+.btn {
+  @apply px-4 py-2 rounded-lg font-medium hover:opacity-90 flex justify-center items-center whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
+.btn1 {
+  @apply flex gap-2 items-center border-2 dark:border-gold-dark border-blue-light-50 bg-blue-light-50 dark:bg-gold-dark text-white-light dark:text-black-dark shadow print:hidden;
+}
+
+.btn2 {
+  @apply text-blue-light-50 bg-transparent border-2 border-blue-light-50 hover:border-blue-light-100 hover:text-blue-light-100 text-center dark:bg-black-dark dark:text-gray-dark dark:border-gray-dark print:hidden;
+}
+
+.btnSVG {
+  @apply text-gray-light dark:text-gray-dark p-0 rounded-full cursor-pointer print:hidden;
+}

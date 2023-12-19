@@ -6,32 +6,48 @@ import {
   ModalChangeStatusProps,
   SearchProps,
 } from "@/interfaces";
+import "./table.css";
 import { Dropdown } from "@/components/molecules";
+import { BackofficeProps, DropItems } from "@/interfaces";
+import { CiCircleList } from "react-icons/ci";
 
 const Table: React.FC<
   DataGuestsProps & ModalProps & ModalChangeStatusProps & SearchProps
-> = ({ dataGuests, setPropsModal, propsModal, search }) => {
-  const openDropdown = (index: number) => {
-    if (propsModal.dropdownIndex === index) {
-      setPropsModal((prev) => ({ ...prev, dropdownIndex: -1 }));
-    } else {
-      setPropsModal((prev) => ({ ...prev, dropdownIndex: index }));
-    }
-  };
+> = ({ dataGuests, setPropsModal, search }) => {
+  const dropItems: DropItems[] = [
+    {
+      name: "Nome",
+      type: "button",
+      onClick: (guest: BackofficeProps) =>
+        setPropsModal((prev) => ({
+          ...prev,
+          guestName: guest.name,
+          attendanceStatus: guest.attendance_status,
+          code: guest.code,
+          changeOn: "name",
+          isOpenModal: true,
+        })),
+    },
+    {
+      name: "Presença",
+      type: "button",
+      onClick: (guest: BackofficeProps) =>
+        setPropsModal((prev) => ({
+          ...prev,
+          guestName: guest.name,
+          attendanceStatus: guest.attendance_status,
+          code: guest.code,
+          changeOn: "presence",
+          isOpenModal: true,
+        })),
+    },
+  ];
 
   const renderBadge = (confirmado: boolean) => {
     if (confirmado) {
-      return (
-        <span className="bg-green-200 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">
-          {statusEnum.CONFIRMADO}
-        </span>
-      );
+      return <span className="greenBadge">{statusEnum.CONFIRMADO}</span>;
     }
-    return (
-      <span className="bg-yellow-200 text-yellow-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">
-        {statusEnum.PENDENTE}
-      </span>
-    );
+    return <span className="yellowBadge">{statusEnum.PENDENTE}</span>;
   };
 
   return (
@@ -54,14 +70,11 @@ const Table: React.FC<
           {dataGuests.guests
             .filter((guest) => guest.name.includes(search))
             .map((guest, index) => (
-              <tr
-                key={index}
-                className="trBody"
-              >
+              <tr key={index} className="trBody">
                 <th className="row-start-1 col-start-3">{index + 1}</th>
                 <th
                   scope="row"
-                  className="row-span-2 row-start-1 col-start-1 font-medium text-gray-900 whitespace-nowrap dark:text-white uppercase"
+                  className="row-span-2 row-start-1 col-start-1 font-medium whitespace-nowrap uppercase"
                 >
                   {guest.name}
                 </th>
@@ -72,23 +85,12 @@ const Table: React.FC<
                   {guest.code}
                 </td>
                 <td className="row-start-2 col-start-3">
-                  <button
-                    className="font-medium text-blue-600 dark:text-blue-500 hover:underline p-0"
-                    onClick={() => {
-                      setPropsModal((prev) => ({
-                        ...prev,
-                        guestName: guest.name,
-                        attendanceStatus: guest.attendance_status,
-                        code: guest.code,
-                      }));
-                      openDropdown(index);
-                    }}
-                  >
-                    Alterar
-                  </button>
-                  {propsModal.dropdownIndex === index && (
-                    <Dropdown setPropsModal={setPropsModal} />
-                  )}
+                  <Dropdown
+                    style="btnSVG"
+                    title={<CiCircleList className="w-6 h-6" />}
+                    dropItems={dropItems}
+                    guest={guest}
+                  />
                 </td>
               </tr>
             ))}

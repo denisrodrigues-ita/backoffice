@@ -1,7 +1,7 @@
 import React from "react";
-import {LabelProps} from "@/interfaces";
+import { childrenlProps } from "@/interfaces";
 
-const Label: React.FC<LabelProps> = ({ children }) => {
+const Label: React.FC<childrenlProps> = ({ children }) => {
   return <label className="w-full">{children}</label>;
 };
 

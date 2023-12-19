@@ -1,12 +1,22 @@
 import React from "react";
-import { ButtonProps } from "@/interfaces";
+import { ButtonProps } from "./interface";
+import "./button.css";
 
-const Button: React.FC<ButtonProps> = ({ onClick, children, type, style }) => {
+const Button: React.FC<ButtonProps> = ({
+  onClick,
+  children,
+  type,
+  style,
+  buttonRef,
+  isLoading = false,
+}) => {
   return (
     <button
+      disabled={isLoading}
       type={type}
-      className={`${style} flex justify-center items-center whitespace-nowrap`}
+      className={`btn ${style}`}
       onClick={onClick}
+      ref={buttonRef}
     >
       {children}
     </button>

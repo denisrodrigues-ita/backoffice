@@ -1,11 +1,12 @@
 import { DataGuestsProps } from "@/interfaces";
 import React from "react";
 import { MdPeopleAlt, MdPlaylistAddCheck } from "react-icons/md";
+import "./card.css";
 
 const Card: React.FC<DataGuestsProps> = ({ dataGuests }) => {
   return (
     <div className="card">
-      <div className="border-gray-light dark:border-gray-dark border-2 rounded-lg flex gap-4 p-4">
+      <div className="border-blue-light-50 dark:border-gray-dark border-2 rounded-lg flex gap-4 p-4">
         <div className="self-center">
           <MdPeopleAlt size={50} />
         </div>
@@ -14,7 +15,7 @@ const Card: React.FC<DataGuestsProps> = ({ dataGuests }) => {
           <p className="card-p">{dataGuests.totalGuests}</p>
         </div>
       </div>
-      <div className="border-gray-light dark:border-gray-dark border-2 rounded-lg flex gap-4 p-4">
+      <div className="border-blue-light-50 dark:border-gray-dark border-2 rounded-lg flex gap-4 p-4">
         <div className="self-center">
           <MdPlaylistAddCheck size={50} />
         </div>
