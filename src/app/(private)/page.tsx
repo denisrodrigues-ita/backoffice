@@ -115,27 +115,33 @@ const Home = () => {
   return (
     <section>
       {dataGuests && <Card dataGuests={dataGuests} />}
-      <div className="flex flex-col sm:flex-row gap-2 mb-4">
-        {user?.user?.role === "admin" && <AddEngaged toast={toast} />}
-        <AddGuest toast={toast} />
-        <Button style="btn2" type="button" onClick={handlePrint}>
-          Imprimir
-        </Button>
-        <div className="relative">
-          <Dropdown
-            style="btnDropdown"
-            dropItems={dropItems}
-            title={"Filtrar"}
+
+      <div className="flex flex-col lg:flex-row w-full lg:w-full sm:w-fit mb-4 gap-2">
+        <div className="flex flex-col sm:flex-row gap-2">
+          {user?.user?.role === "admin" && <AddEngaged toast={toast} />}
+          <AddGuest toast={toast} />
+          <Button style="btn2" type="button" onClick={handlePrint}>
+            Imprimir
+          </Button>
+          <div className="relative">
+            <Dropdown
+              style="btnDropdown"
+              dropItems={dropItems}
+              title={"Filtrar"}
+            />
+          </div>
+        </div>
+        <div className="lg:w-full xl:w-96">
+          <Input
+            type="text"
+            onChange={(e) => handleSearch(e)}
+            value={search}
+            placeholder="Pesquisar"
+            variant="search"
           />
         </div>
-        <Input
-          type="text"
-          onChange={(e) => handleSearch(e)}
-          value={search}
-          placeholder="Pesquisar"
-          variant="search"
-        />
       </div>
+
       {dataGuests && (
         <Table
           dataGuests={dataGuests}
