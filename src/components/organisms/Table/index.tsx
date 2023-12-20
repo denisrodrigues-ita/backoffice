@@ -70,7 +70,7 @@ const Table: React.FC<
           {dataGuests.guests
             .filter((guest) => guest.name.includes(search))
             .map((guest, index) => (
-              <tr key={index} className="trBody">
+              <tr key={guest.id} className="trBody">
                 <th className="row-start-1 col-start-3">{index + 1}</th>
                 <th
                   scope="row"
