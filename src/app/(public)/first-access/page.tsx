@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { apiAuth } from "@/services";
 import { useRouter } from "next/navigation";
 import "react-toastify/dist/ReactToastify.css";
-import { useFormValidations } from "@/validations/LoginValidations";
+import { useFormValidations } from "@/validations";
 
 const FirstAccess = () => {
   const { register, handleSubmit, errors, reset } = useFormValidations({
