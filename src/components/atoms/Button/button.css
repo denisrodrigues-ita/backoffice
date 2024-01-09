@@ -13,3 +13,7 @@
 .btnSVG {
   @apply text-gray-light dark:text-gray-dark p-0 rounded-full cursor-pointer print:hidden;
 }
+
+.btnDropdown {
+  @apply text-blue-light-50 bg-transparent border-2 border-blue-light-50 hover:border-blue-light-100 hover:text-blue-light-100 text-center dark:bg-black-dark dark:text-gray-dark dark:border-gray-dark print:hidden w-full;
+}

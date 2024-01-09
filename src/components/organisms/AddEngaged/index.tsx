@@ -3,7 +3,7 @@ import React from "react";
 import { Button, Input, Spinner } from "@/components/atoms";
 import { ToastProps } from "@/interfaces";
 import { Select } from "@/components/atoms";
-import { useFormValidations } from "@/validations/LoginValidations";
+import { useFormValidations } from "@/validations";
 
 interface EngagedProps {
   password: string;

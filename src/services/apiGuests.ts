@@ -5,6 +5,10 @@ const api = {
     try {
       const response: Response = await fetch(`${url}/guests/${engaged_id}`, {
         method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
       });
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
