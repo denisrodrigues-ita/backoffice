@@ -2,7 +2,13 @@ import React from "react";
 import { Button } from "@/components/atoms";
 import { DropProps } from "@/interfaces";
 
-const Dropdown: React.FC<DropProps> = ({ style, dropItems, guest, title }) => {
+const Dropdown: React.FC<DropProps> = ({
+  style,
+  dropItems,
+  guest,
+  title,
+  translateX,
+}) => {
   const [isOpen, setIsOpen] = React.useState(false);
   let dropdownRef = React.useRef<HTMLDivElement>(null);
   let buttonRef = React.useRef<HTMLButtonElement>(null);
@@ -43,9 +49,9 @@ const Dropdown: React.FC<DropProps> = ({ style, dropItems, guest, title }) => {
       <div
         ref={dropdownRef}
         id="dropdown"
-        className={`z-10 ${
-          isOpen ? "" : "hidden"
-        } mt-1 absolute bg-white divide-y divide-gray-100 rounded-lg shadow w-auto dark:bg-gray-700`}
+        className={`${isOpen ? "" : "hidden"} ${
+          translateX && translateX
+        } mt-1 absolute bg-white divide-y divide-gray-100 rounded-lg shadow w-auto dark:bg-gray-700 z-10`}
       >
         <ul
           className="py-2 text-sm text-gray-700 dark:text-gray-200"
