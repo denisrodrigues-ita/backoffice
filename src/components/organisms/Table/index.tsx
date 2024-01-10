@@ -90,6 +90,7 @@ const Table: React.FC<
                     title={<CiCircleList className="w-6 h-6" />}
                     dropItems={dropItems}
                     guest={guest}
+                    translateX="-translate-x-20"
                   />
                 </td>
               </tr>
