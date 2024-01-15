@@ -74,6 +74,28 @@ const api = {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const result = await response.json();
+
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async deleteGuest(id: number, token: string) {
+    try {
+      const response = await fetch(`${url}/guests/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+
       return result;
     } catch (error) {
       throw error;
