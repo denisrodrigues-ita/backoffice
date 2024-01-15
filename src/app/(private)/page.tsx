@@ -17,6 +17,7 @@ const Home = () => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [dataGuests, setDataGuests] = React.useState<any>();
   const [propsModal, setPropsModal] = React.useState({
+    guestId: -1,
     isOpenModal: false,
     guestName: "",
     attendanceStatus: false,
@@ -46,7 +47,7 @@ const Home = () => {
       }
     };
     fetchGuests();
-  }, []);
+  });
 
   const handlePrint = () => {
     window.print();
