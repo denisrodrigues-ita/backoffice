@@ -21,6 +21,7 @@ const Table: React.FC<
       onClick: (guest: BackofficeProps) =>
         setPropsModal((prev) => ({
           ...prev,
+          guestId: guest.id,
           guestName: guest.name,
           attendanceStatus: guest.attendance_status,
           code: guest.code,
@@ -34,10 +35,25 @@ const Table: React.FC<
       onClick: (guest: BackofficeProps) =>
         setPropsModal((prev) => ({
           ...prev,
+          guestId: guest.id,
           guestName: guest.name,
           attendanceStatus: guest.attendance_status,
           code: guest.code,
           changeOn: "presence",
+          isOpenModal: true,
+        })),
+    },
+    {
+      name: "Deletar",
+      type: "button",
+      onClick: (guest: BackofficeProps) =>
+        setPropsModal((prev) => ({
+          ...prev,
+          guestId: guest.id,
+          guestName: guest.name,
+          attendanceStatus: guest.attendance_status,
+          code: guest.code,
+          changeOn: "delete",
           isOpenModal: true,
         })),
     },
