@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 export interface ModalProps {
   setPropsModal: React.Dispatch<
     React.SetStateAction<{
+      guestId: number;
       guestName: string;
       attendanceStatus: boolean;
       code: string;
@@ -34,6 +35,7 @@ export interface BackofficeProps {
 
 export interface ModalChangeStatusProps {
   propsModal: {
+    guestId: number;
     isOpenModal: boolean;
     guestName: string;
     attendanceStatus: boolean;

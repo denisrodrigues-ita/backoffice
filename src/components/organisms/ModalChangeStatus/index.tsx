@@ -37,7 +37,7 @@ const ModalChangeStatus: React.FC<
         setIsUpdatingStatus(false);
         setNewName("");
       }
-    } else {
+    } else if (propsModal.changeOn === "presence") {
       try {
         const token = localStorage.getItem("token");
 
@@ -53,6 +53,26 @@ const ModalChangeStatus: React.FC<
         );
         if (response) {
           toast.success(`Status alterado com sucesso!`);
+        }
+      } catch (err) {
+        toast.error(`Ops, algo deu errado! ${err}`);
+      } finally {
+        setPropsModal((prev) => ({ ...prev, isOpenModal: false }));
+        setIsUpdatingStatus(false);
+      }
+    } else {
+      try {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          toast.error("Token não informado.");
+          return;
+        }
+
+        const response = await apiGuests.deleteGuest(propsModal.guestId, token);
+
+        if (response) {
+          toast.success("Convidado deletado!");
         }
       } catch (err) {
         toast.error(`Ops, algo deu errado! ${err}`);
@@ -118,11 +138,13 @@ const ModalChangeStatus: React.FC<
             <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
               {propsModal.changeOn === "name"
                 ? `Você esta alterando o nome de ${propsModal.guestName.toLocaleUpperCase()}!`
-                : `Você tem certeza que deseja alterar o status de ${propsModal.guestName.toUpperCase()} para ${
+                : propsModal.changeOn === "presence"
+                ? `Você tem certeza que deseja alterar o status de ${propsModal.guestName.toUpperCase()} para ${
                     propsModal.attendanceStatus
                       ? statusEnum.PENDENTE.toLocaleUpperCase()
                       : statusEnum.CONFIRMADO.toUpperCase()
-                  }?`}{" "}
+                  }?`
+                : `Você tem certeza que deseja excluir o convidado ${propsModal.guestName}?`}{" "}
               {isUpdatingStatus && <Loading />}
             </h3>
             <form action="submit" onSubmit={(e) => fetchChangeStatus(e)}>
@@ -141,7 +163,7 @@ const ModalChangeStatus: React.FC<
                 type="submit"
                 className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
               >
-                Alterar
+                {propsModal.changeOn === "delete" ? "Deletar" : "Alterar"}
               </button>
               <button
                 disabled={isUpdatingStatus}
