@@ -28,7 +28,7 @@ const AddGuest: React.FC<ToastProps> = ({ toast }) => {
     try {
       setIsLoading(true);
       const { response, result } = await apiGuests.createGuest({
-        name: guestName,
+        name: guestName.toLowerCase(),
         engaged_id: user?.user?.id,
         code: shortid.generate().substring(0, 6),
       });
