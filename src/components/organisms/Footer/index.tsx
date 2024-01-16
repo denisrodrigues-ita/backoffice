@@ -12,12 +12,14 @@ const Footer: React.FC = () => {
   const date = new Date();
   return (
     <footer className="my-8">
-      <Link href="/">
-        <DdevSVG
-          style={{ width: "10rem", height: "4rem" }}
-          className="fill-blue-light-50 dark:fill-white-light mx-auto sm:mx-0"
-        />
-      </Link>
+      <div className="w-max mx-auto sm:ml-0">
+        <Link href="/">
+          <DdevSVG
+            style={{ width: "10rem", height: "4rem" }}
+            className="fill-blue-light-50 dark:fill-white-light mx-auto sm:mx-0"
+          />
+        </Link>
+      </div>
       <div className="text-center sm:text-start">
         <div className="flex mt-4 justify-center sm:justify-start">
           <Link href="https://wa.me/5535984484087" target="_blank">
