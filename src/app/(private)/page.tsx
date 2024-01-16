@@ -47,7 +47,7 @@ const Home = () => {
       }
     };
     fetchGuests();
-  });
+  }, []);
 
   const handlePrint = () => {
     window.print();
