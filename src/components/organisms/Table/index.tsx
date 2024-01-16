@@ -84,7 +84,9 @@ const Table: React.FC<
         </thead>
         <tbody>
           {dataGuests.guests
-            .filter((guest) => guest.name.includes(search))
+            .filter((guest) =>
+              guest.name.toLowerCase().includes(search.toLowerCase())
+            )
             .map((guest, index) => (
               <tr key={guest.id} className="trBody">
                 <th className="row-start-1 col-start-3">{index + 1}</th>
