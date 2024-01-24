@@ -1,11 +1,11 @@
 "use client";
 
-import { apiGuests } from "@/services";
 import React from "react";
 import { Button, Input, Spinner } from "@/components/atoms";
 import { ToastProps } from "@/interfaces";
 import { useStore } from "@/store";
 import { useFormValidations } from "@/validations";
+import apiGuests from "@/services/apiGuests";
 
 const AddGuest: React.FC<ToastProps> = ({ toast }) => {
   const { register, handleSubmit, errors, reset } = useFormValidations({

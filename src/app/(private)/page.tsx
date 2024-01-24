@@ -1,15 +1,15 @@
 "use client";
 
 import React from "react";
-import { apiGuests } from "@/services";
-import { Button, Input, Loading } from "@/components/atoms";
-import { Card, Dropdown, Toast } from "@/components/molecules";
-import { AddGuest, ModalChangeStatus, Table } from "@/components/organisms";
+
+import { Loading } from "@/components/atoms";
+import { Card, Toast } from "@/components/molecules";
+import { ModalChangeStatus, TableGuests } from "@/components/organisms";
 import { toast } from "react-toastify";
 import { useStore } from "@/store";
-import AddEngaged from "@/components/organisms/AddEngaged";
-import "react-toastify/dist/ReactToastify.css";
 import { DropItems } from "@/interfaces";
+import NavTools from "@/components/molecules/NavTools";
+import apiGuests from "@/services/apiGuests";
 
 const Home = () => {
   const { user } = useStore();
@@ -117,34 +117,16 @@ const Home = () => {
     <section>
       {dataGuests && <Card dataGuests={dataGuests} />}
 
-      <div className="flex flex-col lg:flex-row w-full lg:w-full sm:w-fit mb-4 gap-2">
-        <div className="flex flex-col sm:flex-row gap-2">
-          {user?.user?.role === "admin" && <AddEngaged toast={toast} />}
-          <AddGuest toast={toast} />
-          <Button style="btn2" type="button" onClick={handlePrint}>
-            Imprimir
-          </Button>
-          <div className="relative">
-            <Dropdown
-              style="btnDropdown"
-              dropItems={dropItems}
-              title={"Filtrar"}
-            />
-          </div>
-        </div>
-        <div className="lg:w-full xl:w-96">
-          <Input
-            type="text"
-            onChange={(e) => handleSearch(e)}
-            value={search}
-            placeholder="Pesquisar"
-            variant="search"
-          />
-        </div>
-      </div>
+      <NavTools
+        toast={toast}
+        handlePrint={handlePrint}
+        dropItems={dropItems}
+        search={search}
+        handleSearch={handleSearch}
+      />
 
       {dataGuests && (
-        <Table
+        <TableGuests
           dataGuests={dataGuests}
           setPropsModal={setPropsModal}
           propsModal={propsModal}

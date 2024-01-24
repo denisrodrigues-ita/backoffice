@@ -3,7 +3,6 @@
 import React from "react";
 import Link from "next/link";
 import { DdevSVG } from "@/assets";
-import { FiChevronDown } from "react-icons/fi";
 import { useStore } from "@/store";
 import { Dropdown } from "@/components/molecules";
 import initialState from "@/store/initialState";
@@ -47,6 +46,14 @@ const Header: React.FC = () => {
   };
 
   const dropItems: DropItems[] = [
+    {
+      name: "Noivos",
+      type: "button",
+      onClick: () => {
+        router.push("/engaged");
+      },
+      hidden: true,
+    },
     {
       name: "logout",
       type: "button",

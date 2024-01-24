@@ -11,7 +11,7 @@ import { Dropdown } from "@/components/molecules";
 import { BackofficeProps, DropItems } from "@/interfaces";
 import { CiCircleList } from "react-icons/ci";
 
-const Table: React.FC<
+const TableGuests: React.FC<
   DataGuestsProps & ModalProps & ModalChangeStatusProps & SearchProps
 > = ({ dataGuests, setPropsModal, search }) => {
   const dropItems: DropItems[] = [
@@ -119,4 +119,4 @@ const Table: React.FC<
   );
 };
 
-export default Table;
+export default TableGuests;

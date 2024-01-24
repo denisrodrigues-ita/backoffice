@@ -13,6 +13,10 @@ export interface ModalProps {
   >;
 }
 
+export interface DataEngagedProps {
+  
+}
+
 export interface DataGuestsProps {
   dataGuests: {
     guests: BackofficeProps[];
@@ -99,6 +103,7 @@ export interface DropItems {
   onChange?: () => void;
   checked?: boolean;
   type: "button" | "checkbox";
+  hidden?: boolean;
 }
 
 export interface DropProps {
@@ -112,5 +117,6 @@ export interface DropProps {
     onChange?: () => void;
     checked?: boolean;
     type: "button" | "checkbox";
+    hidden?: boolean;
   }[];
 }

@@ -29,6 +29,25 @@ const apiEngaged = {
       throw error;
     }
   },
+
+  async getEngageds(token: string) {
+    try {
+      const response: Response = await fetch(`${url}/engaged`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const result = await response.json();
+      return { response, result };
+    } catch (error) {
+      throw error;
+    }
+  },
 };
 
 export default apiEngaged;
