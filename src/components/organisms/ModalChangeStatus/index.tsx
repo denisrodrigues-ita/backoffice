@@ -1,8 +1,8 @@
 import React from "react";
 import statusEnum from "@/enums/stautsEnum";
 import { ModalProps, ModalChangeStatusProps, ToastProps } from "@/interfaces";
-import { apiGuests } from "@/services";
 import { Loading } from "@/components/atoms";
+import apiGuests from "@/services/apiGuests";
 
 const ModalChangeStatus: React.FC<
   ModalChangeStatusProps & ModalProps & ToastProps

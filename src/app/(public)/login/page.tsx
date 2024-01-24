@@ -8,7 +8,6 @@ import { apiAuth } from "@/services";
 import { useStore } from "@/store";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { useFormValidations } from "@/validations";
 
 const Login = () => {

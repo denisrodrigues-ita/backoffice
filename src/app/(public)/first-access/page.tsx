@@ -6,7 +6,6 @@ import { Toast } from "@/components/molecules";
 import { toast } from "react-toastify";
 import { apiAuth } from "@/services";
 import { useRouter } from "next/navigation";
-import "react-toastify/dist/ReactToastify.css";
 import { useFormValidations } from "@/validations";
 
 const FirstAccess = () => {
