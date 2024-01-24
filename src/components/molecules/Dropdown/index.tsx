@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "@/components/atoms";
 import { DropProps } from "@/interfaces";
+import { useStore } from "@/store";
 
 const Dropdown: React.FC<DropProps> = ({
   style,
@@ -10,6 +11,8 @@ const Dropdown: React.FC<DropProps> = ({
   translateX,
 }) => {
   const [isOpen, setIsOpen] = React.useState(false);
+  const { user } = useStore();
+  
   let dropdownRef = React.useRef<HTMLDivElement>(null);
   let buttonRef = React.useRef<HTMLButtonElement>(null);
 
@@ -58,7 +61,7 @@ const Dropdown: React.FC<DropProps> = ({
           aria-labelledby="dropdownDefaultButton"
         >
           {dropItems.map((item) => (
-            <li key={item.name}>
+            <li key={item.name} className={`${item.hidden && user?.user?.role !== 'admin' ? "hidden" : ""}`}>
               {item.type === "button" && (
                 <button
                   onClick={() => item.onClick && item.onClick(guest)}
