@@ -12,7 +12,7 @@ const Dropdown: React.FC<DropProps> = ({
 }) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const { user } = useStore();
-  
+
   let dropdownRef = React.useRef<HTMLDivElement>(null);
   let buttonRef = React.useRef<HTMLButtonElement>(null);
 
@@ -61,7 +61,12 @@ const Dropdown: React.FC<DropProps> = ({
           aria-labelledby="dropdownDefaultButton"
         >
           {dropItems.map((item) => (
-            <li key={item.name} className={`${item.hidden && user?.user?.role !== 'admin' ? "hidden" : ""}`}>
+            <li
+              key={item.name}
+              className={`${
+                item.hidden && user?.user?.role !== "admin" ? "hidden" : ""
+              }`}
+            >
               {item.type === "button" && (
                 <button
                   onClick={() => item.onClick && item.onClick(guest)}

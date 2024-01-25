@@ -5,6 +5,7 @@ import NavTools from "@/components/molecules/NavTools";
 import { DropItems } from "@/interfaces";
 import { toast } from "react-toastify";
 import { apiEngaged } from "@/services";
+import { TableEngaged } from "@/components/organisms";
 
 const Engaged = () => {
   const [search, setSearch] = React.useState("");
@@ -42,8 +43,6 @@ const Engaged = () => {
     };
     fetchEngageds();
   }, []);
-  
-console.log(dataEngageds)
 
   const dropItems: DropItems[] = [
     {
@@ -67,6 +66,10 @@ console.log(dataEngageds)
         search={search}
         handleSearch={handleSearch}
       />
+
+      {dataEngageds && (
+        <TableEngaged dataEngageds={dataEngageds} search={search} />
+      )}
     </section>
   );
 };

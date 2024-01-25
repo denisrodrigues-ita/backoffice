@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import { useStore } from "@/store";
 import { DropItems } from "@/interfaces";
 import NavTools from "@/components/molecules/NavTools";
-import apiGuests from "@/services/apiGuests";
+import { apiGuests } from "@/services";
 
 const Home = () => {
   const { user } = useStore();

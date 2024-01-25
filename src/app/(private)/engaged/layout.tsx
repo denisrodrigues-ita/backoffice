@@ -1,10 +1,9 @@
 "use client";
 
-import { PrivateRoute } from "@/components/molecules";
 import { useStore } from "@/store";
 import { useRouter } from "next/navigation";
 
-export default function PrivateRoutesLayout({
+export default function EngagedLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -15,9 +14,7 @@ export default function PrivateRoutesLayout({
   if (user?.user?.role !== "admin") return router.push("/");
   return (
     <>
-      <PrivateRoute>
-        <main>{children}</main>
-      </PrivateRoute>
+      <section>{children}</section>
     </>
   );
 }

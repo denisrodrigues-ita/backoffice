@@ -85,7 +85,7 @@ export interface UserDataProps {
 
 export interface AppState {
   user: UserProps | null;
-  setUser: (user: UserProps) => void;
+  setUser: (user: UserProps | null) => void;
 }
 
 export interface ToastProps {

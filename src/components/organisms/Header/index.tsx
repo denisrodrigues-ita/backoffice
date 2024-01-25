@@ -58,8 +58,8 @@ const Header: React.FC = () => {
       name: "logout",
       type: "button",
       onClick: () => {
-        setUser(initialState);
         localStorage.setItem("token", "");
+        setUser(null);
         router.push("/login");
       },
     },
